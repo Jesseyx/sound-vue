@@ -1,0 +1,32 @@
+{
+  "name": "sound-vue",
+  "version": "1.0.0",
+  "description": "sound vue",
+  "scripts": {
+    "start": "webpack-dev-server --progress --colors --hot --inline --content-base ./server/public --config ./webpack.config.js"
+  },
+  "keywords": [
+    "sound",
+    "vue",
+    "vuex",
+    "vue-router"
+  ],
+  "author": "Jesseyx",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "css-loader": "^0.25.0",
+    "node-sass": "^3.10.1",
+    "sass-loader": "^4.0.2",
+    "vue-loader": "^9.7.0",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "vue": "^2.0.3",
+    "vue-router": "^2.0.1",
+    "vuex": "^2.0.0"
+  }
+}
