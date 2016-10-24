@@ -20,7 +20,7 @@
         this.isOpen = !this.isOpen;
       },
       onOutsideClick(e) {
-        // must return false, otherwise it still continue
+        // must return false or a value, otherwise it still continue
         if (!this.isOpen) return false;
 
         e.stopPropagation();
@@ -38,6 +38,10 @@
       },
     },
     mounted() {
+      // check slots
+      if (!this.$slots.content || !this.$slots.bomb) {
+        throw new Error('Popover component requires exactly 2 children: content and bomb');
+      }
       document.addEventListener('mousedown', this.onOutsideClick);
     },
     beforeDestroy() {
