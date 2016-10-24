@@ -1,18 +1,16 @@
 <template>
-  <div>
-    <nav-container></nav-container>
-  </div>
+  <c-nav></c-nav>
 </template>
 
 <style lang="sass">
 </style>
 
 <script>
-  import NavContainer from './NavContainer.vue';
+  import cNav from '../components/Nav.vue';
 
   export default {
     components: {
-      NavContainer,
+      cNav,
     },
   };
 </script>
