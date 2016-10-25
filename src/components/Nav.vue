@@ -25,7 +25,7 @@
             <div class="nav-user-popover popover-content" slot="bomb">
               <ul class="nav-user-popover-list">
                 <li class="nav-user-popover-item">
-                  <a class="button orange block" href="#">Sign into SoundCloud</a>
+                  <a class="button orange block" href="#" @click.prevent="loginUser">Sign into SoundCloud</a>
                 </li>
               </ul>
             </div>
@@ -41,6 +41,8 @@
 </style>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   import NavSearch from './NavSearch.vue';
   import Popover from './Popover.vue';
 
@@ -48,6 +50,12 @@
     components: {
       NavSearch,
       Popover,
+    },
+    methods: {
+      // when use mapActions(['loginUser']), the event must be @click.prevent="loginUser()", otherwise the event obj will be the payload to dispatch function
+      loginUser() {
+        this.$store.dispatch('loginUser');
+      },
     },
   };
 </script>

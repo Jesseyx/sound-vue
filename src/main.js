@@ -1,3 +1,4 @@
+import 'isomorphic-fetch';  // fetch
 import Vue from 'vue';
 
 import router from './router';
