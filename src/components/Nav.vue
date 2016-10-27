@@ -7,8 +7,35 @@
 
       <div class="nav-nav float-left">
         <div class="nav-nav-item">
-          <a class="nav-nav-item-link active" href="#">SoundRedux</a>
+          <router-link class="nav-nav-item-link active" :to="{ name: 'songs' }">SoundRedux</router-link>
         </div>
+        
+        <div class="nav-nav-item" v-if="authedUser">
+          <router-link class="nav-nav-user-link" active-class="active" :to="{ name: 'stream' }">
+            <span class="nav-nav-user-link-text">stream</span>
+          </router-link>
+        </div>
+
+        <div class="nav-nav-item" v-if="authedUser">
+          <router-link class="nav-nav-user-link" active-class="active" :to="{ name: 'likes' }">
+            <span class="nav-nav-user-link-text">likes</span>
+          </router-link>
+        </div>
+
+        <popover class="nav-nav-item nav-playlists" v-if="authedUser">
+          <div class="nav-nav-user-link" :class="{ active: playlistsSelected }" slot="content">
+            <span class="nav-nav-user-link-text">playlist</span>
+            <i class="icon ion-chevron-down"></i>
+            <i class="icon ion-chevron-up"></i>
+          </div>
+          <div class="nav-playlists-popover popover-content" slot="bomb">
+            <authed-playlist
+              v-for="playlistId in authedPlaylists"
+              :playlistId="playlistId"
+            >
+            </authed-playlist>
+          </div>
+        </popover>
       </div>
 
       <div class="nav-nav float-right">
@@ -16,7 +43,22 @@
           <nav-search></nav-search>
         </div>
         <div class="nav-nav-item">
-          <popover class="nav-user">
+          <popover class="nav-user" v-if="authedUser">
+            <div class="nav-user-link" slot="content">
+              <img class="nav-authed-image" :src="userAvatar" alt="User avatar" />
+              <i class="icon ion-chevron-down"></i>
+              <i class="icon ion-chevron-up"></i>
+            </div>
+            <div class="nav-user-popover popover-content" slot="bomb">
+              <ul class="nav-user-popover-list">
+                <li class="nav-user-popover-item">
+                  <a href="#" @click.prevent="logout">Log Out</a>
+                </li>
+              </ul>
+            </div>
+          </popover>
+
+          <popover class="nav-user" v-if="!authedUser">
             <div class="nav-user-link" slot="content">
               <i class="icon ion-person"></i>
               <i class="icon ion-chevron-down"></i>
@@ -25,7 +67,7 @@
             <div class="nav-user-popover popover-content" slot="bomb">
               <ul class="nav-user-popover-list">
                 <li class="nav-user-popover-item">
-                  <a class="button orange block" href="#" @click.prevent="loginUser">Sign into SoundCloud</a>
+                  <a class="button orange block" href="#" @click.prevent="login">Sign into SoundCloud</a>
                 </li>
               </ul>
             </div>
@@ -43,18 +85,34 @@
 <script>
   import { mapGetters } from 'vuex';
 
-  import NavSearch from './NavSearch.vue';
+  import NavSearch from './nav/NavSearch.vue';
   import Popover from './Popover.vue';
+  import AuthedPlaylist from './nav/AuthedPlaylist.vue';
+
+  import { getImageUrl } from '../utils/SongUtils';
 
   export default {
     components: {
       NavSearch,
       Popover,
+      AuthedPlaylist,
+    },
+    computed: {
+      ...mapGetters(['authedUser', 'authedPlaylists']),
+      userAvatar() {
+        return getImageUrl(this.authedUser.avatar_url);
+      },
+      playlistsSelected() {
+        return this.$route.name === 'playlists';
+      },
     },
     methods: {
       // when use mapActions(['loginUser']), the event must be @click.prevent="loginUser()", otherwise the event obj will be the payload to dispatch function
-      loginUser() {
+      login() {
         this.$store.dispatch('loginUser');
+      },
+      logout() {
+        this.$store.dispatch('logoutUser');
       },
     },
   };

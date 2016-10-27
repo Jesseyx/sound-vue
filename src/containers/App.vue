@@ -14,5 +14,8 @@
     components: {
       NavContainer,
     },
+    mounted() {
+      this.$store.dispatch('initAuth');
+    },
   };
 </script>

@@ -1,13 +1,22 @@
 import SC from 'soundcloud';
 import Cookies from 'js-cookie';
+import { normalize, arrayOf } from 'normalizr';
 
-import { CLIENT_ID } from '../constants/Config';
-import { SC_API_URL } from '../constants/Api';
-import * as types from '../constants/mutation-types';
-import { fetchSongs } from './playlists';
-import { AUTHED_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
+import { CLIENT_ID } from '../../constants/Config';
+import { SC_API_URL } from '../../constants/Api';
+import * as types from '../../constants/mutation-types';
+import { fetchSongs, receiveSongs } from './playlists';
+import { AUTHED_PLAYLIST_SUFFIX } from '../../constants/PlaylistConstants';
+import { songSchema, playlistSchema, userSchema } from '../../constants/Schemes';
 
 const COOKIE_PATH = 'accessToken';
+
+export function initAuth(context) {
+  const accessToken = Cookies.get(COOKIE_PATH);
+  if (accessToken) {
+    authUser(context, accessToken, false);
+  }
+}
 
 function authUser(context, accessToken, shouldShowStream = true) {
   return fetchAuthedUser(context, accessToken, shouldShowStream);
@@ -26,6 +35,13 @@ function receiveAuthedUserPre(context, accessToken, user, shouldShowStream) {
 
   // Access to user streaming media and other data
   fetchStream(context, accessToken);
+  fetchLikes(context, accessToken);
+  fetchPlaylists(context, accessToken);
+  fetchFollowings(context, accessToken);
+
+  if (shouldShowStream) {
+    console.log('should go to me page');
+  }
 }
 
 function fetchStream(context, accessToken) {
@@ -34,6 +50,59 @@ function fetchStream(context, accessToken) {
     url: `${SC_API_URL}/me/activities/tracks/affiliated?limit=50&oauth_token=${accessToken}`,
     playlist: `stream${AUTHED_PLAYLIST_SUFFIX}`,
   });
+}
+
+function fetchLikes(context, accessToken) {
+  fetch(`${SC_API_URL}/me/favorites?oauth_token=${accessToken}`)
+    .then(response => response.json())
+    .then((json) => {
+      const songs = json.filter(song => song.streamable);
+      const normalized = normalize(songs, arrayOf(songSchema));
+      const likes = normalized.result
+        .reduce((obj, songId) => Object.assign({}, obj, { [songId]: 1 }), {});
+
+      context.commit(types.RECEIVE_LIKES, likes);
+      receiveSongs(context, normalized.entities, normalized.result, `likes${AUTHED_PLAYLIST_SUFFIX}`);
+    });
+}
+
+function fetchPlaylists(context, accessToken) {
+  fetch(`${SC_API_URL}/me/playlists?oauth_token=${accessToken}`)
+    .then(response => response.json())
+    .then((json) => {
+      console.log(json);
+      const normalized = normalize(json, arrayOf(playlistSchema));
+      console.log(normalized);
+      context.commit(types.RECEIVE_AUTHED_PLAYLISTS, normalized.result);
+      context.commit(types.RECEIVE_ENTITIES, normalized.entities);
+
+      normalized.result.forEach((playlistId) => {
+        const playlist = normalized.entities.playlists[playlistId];
+        receiveSongs(context, {}, playlist.tracks, playlist.title + AUTHED_PLAYLIST_SUFFIX);
+      });
+    })
+    .catch((err) => { throw err; });
+}
+
+function fetchFollowings(context, accessToken) {
+  fetch(`${SC_API_URL}/me/followings?oauth_token=${accessToken}`)
+    .then(response => response.json())
+    .then((json) => {
+      console.log('fetchFollowings');
+      console.log(json);
+      return normalize(json.collection, arrayOf(userSchema));
+    })
+    .then((normalized) => {
+      const users = normalized.result
+        .reduce((obj, userId) => Object.assign({}, obj, { [userId]: 1 }), {});
+      receiveAuthedFollowings(context, users, normalized.entities);
+    })
+    .catch((err) => { throw err; });
+}
+
+function receiveAuthedFollowings({ commit }, users, entities) {console.log('receiveAuthedFollowings');console.log(entities);
+  commit(types.RECEIVE_ENTITIES, entities);
+  commit(types.RECEIVE_AUTHED_FOLLOWINGS, users);
 }
 
 export function loginUser(context, shouldShowStream = true) {
@@ -50,4 +119,23 @@ export function loginUser(context, shouldShowStream = true) {
       authUser(context, authObj.oauth_token, shouldShowStream);
     })
     .catch((err) => { throw err; });
+}
+
+export function logoutUser(context) {
+  console.log('logout');
+  Cookies.remove(COOKIE_PATH);
+
+  const { authed, entities } = context.rootState;
+  const playlists = authed.playlists.map(playlistId =>
+    entities.playlists[playlistId].title + AUTHED_PLAYLIST_SUFFIX
+  );
+
+  // navigateTo
+
+  // reset
+  resetAuthed(context, playlists);
+}
+
+function resetAuthed({ commit }, playlists) {
+  commit(types.RESET_AUTHED, playlists);
 }

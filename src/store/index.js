@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import authed from './modules/authed';
 import playlists from './modules/playlists';
+import entities from './modules/entities';
 
 import plugins from './plugins';
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   modules: {
     authed,
     playlists,
+    entities,
   },
   plugins,
 });

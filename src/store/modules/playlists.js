@@ -2,7 +2,7 @@ import mutations from '../mutations/playlists';
 import * as actions from '../actions/playlists';
 import * as getters from '../getters/playlists';
 
-import { AUTHED_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
+import { AUTHED_PLAYLIST_SUFFIX } from '../../constants/PlaylistConstants';
 
 const LIKES_PLAYLIST_KEY = `likes${AUTHED_PLAYLIST_SUFFIX}`;
 const STREAM_PLAYLIST_KEY = `stream${AUTHED_PLAYLIST_SUFFIX}`;

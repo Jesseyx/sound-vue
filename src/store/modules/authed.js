@@ -4,6 +4,9 @@ import * as getters from '../getters/authed';
 
 const state = {
   accessToken: null,
+  followings: {},
+  likes: {},
+  playlists: [],
   user: null,
 };
 

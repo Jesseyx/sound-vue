@@ -1,3 +1,7 @@
-export const getB = (state) => {
-  return 'B';
+export const authedUser = (state) => {
+  return state.user;
+};
+
+export const authedPlaylists = (state) => {
+  return state.playlists;
 };

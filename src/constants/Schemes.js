@@ -9,7 +9,7 @@ song.define({
 });
 
 playlist.define({
-
+  tracks: arrayOf(song),
 });
 
 export const songSchema = song;

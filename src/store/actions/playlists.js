@@ -1,8 +1,8 @@
 import { normalize, arrayOf } from 'normalizr';
 
-import * as types from '../constants/mutation-types';
-import { GENRES_MAP } from '../constants/SongConstants';
-import { songSchema } from '../constants/Schemes';
+import * as types from '../../constants/mutation-types';
+import { GENRES_MAP } from '../../constants/SongConstants';
+import { songSchema } from '../../constants/Schemes';
 
 export function fetchSongs(context, { url, playlist }) {
   context.commit(types.REQUEST_SONGS, playlist);
@@ -51,6 +51,12 @@ export function fetchSongs(context, { url, playlist }) {
     .catch((err) => { throw err; });
 }
 
-function receiveSongs(context, entities, songs, playlist, nextUrl, futureUrl) {
-  console.log(context, entities, songs, playlist, nextUrl, futureUrl);
+export function receiveSongs({ commit }, entities, songs, playlist, nextUrl = null, futureUrl = null) {
+  commit(types.RECEIVE_ENTITIES, entities);
+  commit(types.RECEIVE_SONGS, {
+    songs,
+    playlist,
+    nextUrl,
+    futureUrl,
+  });
 }
