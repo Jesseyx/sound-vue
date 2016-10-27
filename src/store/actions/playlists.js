@@ -3,12 +3,13 @@ import { normalize, arrayOf } from 'normalizr';
 import * as types from '../../constants/mutation-types';
 import { GENRES_MAP } from '../../constants/SongConstants';
 import { songSchema } from '../../constants/Schemes';
+import { constructUrl } from '../../utils/SongUtils';
 
 export function fetchSongs(context, { url, playlist }) {
-  context.commit(types.REQUEST_SONGS, playlist);
+  requestSongs(context, playlist);
   // context.commit(types.REQUEST_SONGS, 'testPlaylist');
 
-  const { authed } = context.rootState;
+  const accessToken = context.getters.accessToken;
   return fetch(url)
     .then(response => response.json())
     .then((json) => {
@@ -17,12 +18,12 @@ export function fetchSongs(context, { url, playlist }) {
       let futureUrl = null;
       if (json.next_href) {
         nextUrl = json.next_href;
-        nextUrl += (authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
+        nextUrl += (accessToken ? `&oauth_token=${accessToken}` : '');
       }
 
       if (json.future_href) {
         futureUrl = json.future_href;
-        futureUrl += (authed.accessToken ? `&oauth_token=${authed.accessToken}` : '');
+        futureUrl += (accessToken ? `&oauth_token=${accessToken}` : '');
       }
 
       const songs = json.collection
@@ -51,6 +52,10 @@ export function fetchSongs(context, { url, playlist }) {
     .catch((err) => { throw err; });
 }
 
+function requestSongs({ commit }, playlist) {
+  commit(types.REQUEST_SONGS, playlist);
+}
+
 export function receiveSongs({ commit }, entities, songs, playlist, nextUrl = null, futureUrl = null) {
   commit(types.RECEIVE_ENTITIES, entities);
   commit(types.RECEIVE_SONGS, {
@@ -59,4 +64,36 @@ export function receiveSongs({ commit }, entities, songs, playlist, nextUrl = nu
     nextUrl,
     futureUrl,
   });
+}
+
+export function fetchSongsIfNeeded(context, playlist) {
+  const playlists = context.getters.playlists;
+
+  if (shouldFetchSongs(playlists, playlist)) {
+    const nextUrl = getNextUrl(playlists, playlist);
+    return fetchSongs(context, {
+      url: nextUrl,
+      playlist,
+    });
+  }
+}
+
+function shouldFetchSongs(playlists, playlist) {
+  const activePlaylist = playlists[playlist];
+
+  if (!activePlaylist || (!activePlaylist.isFetching && (activePlaylist.nextUrl !== null))) {
+    return true;
+  }
+
+  return false;
+}
+
+function getNextUrl(playlists, playlist) {
+  const activePlaylist = playlists[playlist];
+
+  if (!activePlaylist || activePlaylist.nextUrl === null) {
+    return constructUrl(playlist);
+  }
+
+  return activePlaylist.nextUrl;
 }

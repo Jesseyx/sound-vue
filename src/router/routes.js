@@ -1,8 +1,11 @@
+import SongsContainer from '../containers/SongsContainer.vue';
+
 const routes = [
   {
     path: '/songs',
     name: 'songs',
     alias: '/',
+    component: resolve => resolve(SongsContainer),
   },
   {
     path: '/me',

@@ -1,3 +1,3 @@
-export const getPlaylistName = () => {
-  return 'playlist';
+export const playlists = (state) => {
+  return state;
 };
