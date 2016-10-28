@@ -6,6 +6,8 @@
     :authedUser="authedUser"
     :time="info.time"
     :playlist="info.playlist"
+    :playingSongId="playingSongId"
+    :authedLikes="authedLikes"
   >
   </songs>
 </template>
@@ -22,7 +24,7 @@
       Songs,
     },
     computed: {
-      ...mapGetters(['playlists', 'songEntities', 'userEntities', 'authedUser']),
+      ...mapGetters(['playlists', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'playingSongId']),
       info() {
         const info = {};
         const { query } = this.$route;

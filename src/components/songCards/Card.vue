@@ -1,7 +1,8 @@
 <template>
-  <div class="card song-card">
+  <div class="card song-card" :class="{ active: isActive }">
     <div class="song-card-image" :style="songImgStyle">
-      <div class="toggle-play-button">
+      <toggle-play-button-container v-if="isActive"></toggle-play-button-container>
+      <div class="toggle-play-button" v-else @click="playSong">
         <i class="toggle-play-button-icon ion-ios-play"></i>
       </div>
     </div>
@@ -28,6 +29,7 @@
         <song-heart
           :className="'song-card-heart'"
           :authedUser="authedUser"
+          :isLiked="isLiked"
         >
         </song-heart>
       </div>
@@ -39,6 +41,7 @@
 
 <script>
   import SongHeart from '../SongHeart.vue';
+  import TogglePlayButtonContainer from '../../containers/TogglePlayButtonContainer.vue';;
 
   import { IMAGE_SIZES } from '../../constants/SongConstants';
   import { getImageUrl } from '../../utils/SongUtils';
@@ -47,6 +50,7 @@
   export default {
     components: {
       SongHeart,
+      TogglePlayButtonContainer,
     },
     computed: {
       songImgStyle() {
@@ -61,7 +65,20 @@
       title() {
         return formatSongTitle(this.song.title);
       },
+      isLiked() {
+        const { songId, authedLikes } = this;
+        return Boolean(songId in authedLikes && authedLikes[songId] === 1);
+      },
     },
-    props: ['songId', 'song', 'user', 'authedUser'],
+    methods: {
+      playSong() {
+        const { songIndex, playlist } = this;
+        this.$store.dispatch('playSong', {
+          index: songIndex,
+          playlist,
+        });
+      },
+    },
+    props: ['songId', 'song', 'user', 'authedUser', 'authedLikes', 'isActive', 'songIndex', 'playlist'],
   };
 </script>

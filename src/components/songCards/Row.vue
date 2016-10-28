@@ -1,11 +1,15 @@
 <template>
   <div class="songs-row grid">
-    <div class="col-1-5 clearfix" v-for="id in list">
+    <div class="col-1-5 clearfix" v-for="(id, index) in list">
       <card
         :songId="id"
         :song="songEntities[id]"
         :user="userEntities[songEntities[id].user_id]"
         :authedUser="authedUser"
+        :isActive="id === playingSongId"
+        :authedLikes="authedLikes"
+        :songIndex="baseIndex + index"
+        :playlist="playlist"
       >
       </card>
     </div>
@@ -27,7 +31,10 @@
       paddingNum() {
         return (this.chunk - this.list.length);
       },
+      baseIndex() {
+        return this.chunk * this.index;
+      },
     },
-    props: ['list', 'chunk', 'songEntities', 'userEntities', 'authedUser'],
+    props: ['list', 'index', 'chunk', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'playingSongId', 'playlist'],
   };
 </script>

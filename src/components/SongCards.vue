@@ -1,12 +1,16 @@
 <template>
   <div class="content">
     <s-row
-      v-for="item in normalized"
+      v-for="(item, index) in normalized"
       :list="item"
+      :index="index"
       :chunk="chunk"
       :songEntities="songEntities"
       :userEntities="userEntities"
       :authedUser="authedUser"
+      :playingSongId="playingSongId"
+      :authedLikes="authedLikes"
+      :playlist="playlist"
     >
     </s-row>
 
@@ -58,6 +62,6 @@
         return result;
       },
     },
-    props: ['playlist', 'playlists', 'songEntities', 'userEntities', 'authedUser'],
+    props: ['playlist', 'playlists', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'playingSongId'],
   };
 </script>

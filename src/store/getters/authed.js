@@ -9,3 +9,7 @@ export const authedUser = (state) => {
 export const authedPlaylists = (state) => {
   return state.playlists;
 };
+
+export const authedLikes = (state) => {
+  return state.likes;
+};
