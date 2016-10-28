@@ -5,3 +5,7 @@ export const playlistEntities = (state) => {
 export const songEntities = (state) => {
   return state.songs;
 };
+
+export const userEntities = (state) => {
+  return state.users;
+};

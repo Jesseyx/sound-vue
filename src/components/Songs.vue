@@ -1,36 +1,30 @@
 <template>
-  <toolbar :playlist="playlist" :time="time"></toolbar>
+  <div class="songs">
+    <toolbar :playlist="playlist" :time="time"></toolbar>
+
+    <div class="container">
+      <song-cards
+        :playlist="playlist"
+        :playlists="playlists"
+        :songEntities="songEntities"
+        :userEntities="userEntities"
+        :authedUser="authedUser"
+      >
+      </song-cards>
+    </div>
+  </div>
 </template>
 
 <style></style>
 
 <script>
-  import { mapGetters } from 'vuex';
-
   import Toolbar from '../components/Toolbar.vue';
+  import SongCards from '../components/SongCards.vue';
 
   export default {
     components: {
       Toolbar,
-    },
-    computed: {
-      ...mapGetters(['playlists']),
-      time() {
-        const query = this.$route.query;
-        return query && query.t ? query.t : null;
-      },
-      playlist() {
-        const query = this.$route.query;
-        const playlist = query && query.q ? query.q : 'house';
-
-        const time = query && query.t ? query.t : null;
-
-        if (time) {
-          return `${playlist} - ${time}`;
-        }
-
-        return playlist;
-      },
+      SongCards,
     },
     watch: {
       playlist(nextPlaylist) {
@@ -40,9 +34,11 @@
       },
     },
     beforeMount() {
-      if (!this.playlist in this.playlists) {
-        this.$store.dispatch('fetchSongsIfNeeded', this.playlist);
+      const { playlist, playlists } = this;
+      if (!(playlist in playlists)) {
+        this.$store.dispatch('fetchSongsIfNeeded', playlist);
       }
     },
+    props: ['playlists', 'songEntities', 'userEntities', 'authedUser', 'time', 'playlist'],
   };
 </script>
