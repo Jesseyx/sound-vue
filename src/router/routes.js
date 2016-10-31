@@ -8,6 +8,10 @@ const routes = [
     component: resolve => resolve(SongsContainer),
   },
   {
+    path: '/songs/:id',
+    name: 'songDetail',
+  },
+  {
     path: '/me',
     children: [
       {
@@ -23,6 +27,10 @@ const routes = [
         name: 'playlists',
       },
     ],
+  },
+  {
+    path: '/users/:id',
+    name: 'userDetail',
   },
 ];
 

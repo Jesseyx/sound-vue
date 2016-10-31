@@ -20,4 +20,8 @@ export default {
   [types.CHANGE_PLAYING_SONG] (state, songIndex) {
     state.currentSongIndex = songIndex;
   },
+
+  [types.TOGGLE_IS_PLAYING] (state, isPlaying) {
+    state.isPlaying = isPlaying;
+  },
 };

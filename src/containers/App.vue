@@ -2,6 +2,7 @@
   <div>
     <nav-container></nav-container>
     <router-view></router-view>
+    <player-container></player-container>
   </div>
 </template>
 
@@ -10,10 +11,12 @@
 
 <script>
   import NavContainer from './NavContainer.vue';
+  import PlayerContainer from './PlayerContainer.vue';
 
   export default {
     components: {
       NavContainer,
+      PlayerContainer,
     },
     mounted() {
       this.$store.dispatch('initAuth');

@@ -18,3 +18,11 @@ export const IMAGE_SIZES = {
   LARGE: 't300x300',
   XLARGE: 't500x500',
 };
+
+export const CHANGE_TYPES = {
+  NEXT: 'next',
+  PLAY: 'play',
+  PREV: 'prev',
+  SHUFFLE: 'shuffle',
+};
+

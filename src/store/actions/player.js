@@ -1,4 +1,5 @@
 import * as types from '../../constants/mutation-types';
+import { CHANGE_TYPES } from '../../constants/SongConstants';
 
 export function playSong(context, { playlist, index }) {
   changeCurrentTime(context, 0);
@@ -13,7 +14,7 @@ export function playSong(context, { playlist, index }) {
   changePlayingSong(context, index);
 };
 
-function changeCurrentTime({ commit }, time) {
+export function changeCurrentTime({ commit }, time) {
   commit(types.CHANGE_CURRENT_TIME, time);
 }
 
@@ -23,4 +24,29 @@ function changeSelectedPlaylists({ commit }, playlist) {
 
 function changePlayingSong({ commit }, songIndex) {
   commit(types.CHANGE_PLAYING_SONG, songIndex);
+}
+
+export function toggleIsPlaying({ commit }, isPlaying) {
+  commit(types.TOGGLE_IS_PLAYING, isPlaying);
+}
+
+export function changeSong(context, changeType) {
+  const { currentSongIndex, selectedPlaylists, playlists } = context.getters;
+  const currentPlaylist = selectedPlaylists[selectedPlaylists.length - 1];
+  const currentPlaylistItems = playlists[currentPlaylist].items;
+  let newSongIndex;
+
+  if (changeType === CHANGE_TYPES.NEXT) {
+    newSongIndex = currentSongIndex + 1;
+  } else if (changeType === CHANGE_TYPES.PREV) {
+    newSongIndex = currentSongIndex - 1;
+  } else if (changeType === CHANGE_TYPES.SHUFFLE) {
+    newSongIndex = Math.floor(((Math.random() * currentPlaylistItems.length) - 1) + 0);
+  }
+
+  if (newSongIndex >= currentPlaylistItems.length || newSongIndex < 0) {
+    return;
+  }
+
+  changePlayingSong(context, newSongIndex);
 }

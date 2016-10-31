@@ -15,3 +15,11 @@ export const selectedPlaylists = (state) => {
 export const isPlaying = (state) => {
   return state.isPlaying;
 };
+
+export const currentSongIndex = (state) => {
+  return state.currentSongIndex;
+};
+
+export const player = (state) => {
+  return state;  
+};
