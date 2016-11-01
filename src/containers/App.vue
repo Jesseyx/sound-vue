@@ -19,6 +19,7 @@
       PlayerContainer,
     },
     mounted() {
+      this.$store.dispatch('initEnvironment');
       this.$store.dispatch('initAuth');
     },
   };

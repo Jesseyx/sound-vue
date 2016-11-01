@@ -8,6 +8,7 @@
     :playlist="info.playlist"
     :playingSongId="playingSongId"
     :authedLikes="authedLikes"
+    :eHeight="eHeight"
   >
   </songs>
 </template>
@@ -24,7 +25,7 @@
       Songs,
     },
     computed: {
-      ...mapGetters(['playlists', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'playingSongId']),
+      ...mapGetters(['playlists', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'playingSongId', 'eHeight']),
       info() {
         const info = {};
         const { query } = this.$route;

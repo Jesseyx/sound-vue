@@ -15,6 +15,7 @@
         :authedUser="authedUser"
         :playingSongId="playingSongId"
         :authedLikes="authedLikes"
+        :eHeight="eHeight"
       >
       </song-cards>
     </div>
@@ -64,6 +65,6 @@
         this.$store.dispatch('fetchSongsIfNeeded', playlist);
       }
     },
-    props: ['playlists', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'time', 'playlist', 'playingSongId'],
+    props: ['playlists', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'time', 'playlist', 'playingSongId', 'eHeight'],
   };
 </script>

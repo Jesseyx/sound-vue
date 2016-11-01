@@ -5,6 +5,7 @@ import authed from './modules/authed';
 import playlists from './modules/playlists';
 import entities from './modules/entities';
 import player from './modules/player';
+import environment from './modules/environment';
 
 import plugins from './plugins';
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     playlists,
     entities,
     player,
+    environment,
   },
   plugins,
 });
