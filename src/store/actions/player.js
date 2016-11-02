@@ -22,7 +22,7 @@ function changeSelectedPlaylists({ commit }, playlist) {
   commit(types.CHANGE_SELECTED_PLAYLISTS, playlist);
 }
 
-function changePlayingSong({ commit }, songIndex) {
+export function changePlayingSong({ commit }, songIndex) {
   commit(types.CHANGE_PLAYING_SONG, songIndex);
 }
 

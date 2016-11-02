@@ -1,14 +1,14 @@
 <template>
   <songs
+    :authedLikes="authedLikes"
+    :authedUser="authedUser"
+    :eHeight="eHeight"
+    :playingSongId="playingSongId"
+    :playlist="info.playlist"
     :playlistData="playlistData"
     :songEntities="songEntities"
-    :userEntities="userEntities"
-    :authedUser="authedUser"
     :time="info.time"
-    :playlist="info.playlist"
-    :playingSongId="playingSongId"
-    :authedLikes="authedLikes"
-    :eHeight="eHeight"
+    :userEntities="userEntities"
   >
   </songs>
 </template>
@@ -25,7 +25,7 @@
       Songs,
     },
     computed: {
-      ...mapGetters(['playlists', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'playingSongId', 'eHeight']),
+      ...mapGetters(['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlists', 'songEntities', 'userEntities']),
       info() {
         const info = {};
         const { query } = this.$route;
@@ -43,7 +43,8 @@
       },
       playlistData() {
         const { info, playlists } = this;
-        return info.playlist in playlists ? playlists[info.playlist] : {};
+        const { playlist } = info;
+        return playlist in playlists ? playlists[playlist] : {};
       },
     },
   };

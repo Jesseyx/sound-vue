@@ -4,15 +4,15 @@
     
     <s-row
       v-for="(item, index) in normalized"
-      :list="item"
-      :index="index"
+      :authedLikes="authedLikes"
+      :authedUser="authedUser"
       :chunk="chunk"
+      :index="index"
+      :list="item"
+      :playingSongId="playingSongId"
+      :playlist="playlist"
       :songEntities="songEntities"
       :userEntities="userEntities"
-      :authedUser="authedUser"
-      :playingSongId="playingSongId"
-      :authedLikes="authedLikes"
-      :playlist="playlist"
     >
     </s-row>
 
@@ -137,6 +137,6 @@
     beforeDestroy() {
       window.removeEventListener('scroll', this.onScroll, false);
     },
-    props: ['playlist', 'playlistData', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'playingSongId', 'eHeight'],
+    props: ['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlist', 'playlistData', 'songEntities', 'userEntities'],
   };
 </script>

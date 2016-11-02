@@ -8,6 +8,7 @@ import * as types from '../../constants/mutation-types';
 import { fetchSongs, receiveSongs } from './playlists';
 import { AUTHED_PLAYLIST_SUFFIX } from '../../constants/PlaylistConstants';
 import { songSchema, playlistSchema, userSchema } from '../../constants/Schemes';
+import { changePlayingSong } from './player';
 
 const COOKIE_PATH = 'accessToken';
 
@@ -138,4 +139,42 @@ export function logoutUser(context) {
 
 function resetAuthed({ commit }, playlists) {
   commit(types.RESET_AUTHED, playlists);
+}
+
+export function toggleLike(context, songId) {
+  const { accessToken, authedLikes, selectedPlaylists, currentSongIndex } = context.getters;
+
+  const liked = songId in authedLikes && authedLikes[songId] === 1 ? 0 : 1;
+
+  if (!(songId in authedLikes)) {
+    // add to playlists
+    appendLike(context, songId);
+    // if is playing likes playlist now
+    if (currentSongIndex !== null
+      && selectedPlaylists[selectedPlaylists.length - 1] === `likes${AUTHED_PLAYLIST_SUFFIX}`) {
+      changePlayingSong(context, currentSongIndex + 1);
+    }
+  }
+
+  setLike(context, {
+    songId,
+    liked,
+  });
+
+  syncLike(accessToken, songId, liked);
+}
+
+function appendLike({ commit }, songId) {
+  commit(types.APPEND_LIKE, songId);
+}
+
+function setLike({ commit }, payload) {
+  commit(types.SET_LIKE, payload);
+}
+
+function syncLike(accessToken, songId, liked) {
+  fetch(
+    `${SC_API_URL}/me/favorites/${songId}?oauth_token=${accessToken}`,
+    { method: liked ? 'put' : 'delete' }
+  );
 }

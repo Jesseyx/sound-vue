@@ -48,6 +48,11 @@ export default {
     }
   },
 
+  [types.APPEND_LIKE] (state, songId) {
+    const currentList = state[LIKES_PLAYLIST_KEY];
+    state[LIKES_PLAYLIST_KEY] = { ...currentList, items: [ ...currentList, songId ] };
+  },
+
   [types.RESET_AUTHED] (state, playlists) {
     const resetedPlaylists = [...playlists, STREAM_PLAYLIST_KEY, LIKES_PLAYLIST_KEY];
     const newState = resetedPlaylists

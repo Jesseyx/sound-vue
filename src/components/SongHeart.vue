@@ -12,7 +12,7 @@
       </div>
     </popover>
 
-    <a class="song-heart" :class="[className, isLiked ? 'liked' : '']" href="#" v-else>
+    <a class="song-heart" :class="[className, isLiked ? 'liked' : '']" href="#" v-else @click.prevent="toggleLike">
       <i class="icon ion-ios-heart"></i>
     </a>
 </template>
@@ -30,7 +30,10 @@
       login() {
         this.$store.dispatch('loginUser', false);
       },
+      toggleLike() {
+        this.$store.dispatch('toggleLike', this.songId);
+      },
     },
-    props: ['className', 'authedUser', 'isLiked'],
+    props: ['authedUser', 'className', 'isLiked', 'songId'],
   };
 </script>

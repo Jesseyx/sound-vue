@@ -1,6 +1,6 @@
 <template>
   <div class="card song-card" :class="{ active: isActive }">
-    <div class="song-card-image" :style="songImgStyle">
+    <div class="song-card-image" :style="style">
       <toggle-play-button-container v-if="isActive"></toggle-play-button-container>
       <div class="toggle-play-button" v-else @click="playSong">
         <i class="toggle-play-button-icon ion-ios-play"></i>
@@ -8,7 +8,7 @@
     </div>
 
     <div class="song-card-user clearfix">
-      <img class="song-card-user-image" :src="userAvatar" alt="User avatar">
+      <img class="song-card-user-image" :src="avatar" alt="User avatar">
       <div class="song-card-details">
         <router-link
           class="song-card-title"
@@ -27,9 +27,10 @@
         </router-link>
 
         <song-heart
-          :className="'song-card-heart'"
           :authedUser="authedUser"
+          :className="'song-card-heart'"
           :isLiked="isLiked"
+          :songId="songId"
         >
         </song-heart>
       </div>
@@ -53,13 +54,14 @@
       TogglePlayButtonContainer,
     },
     computed: {
-      songImgStyle() {
+      style() {
         const image = getImageUrl(this.song.artwork_url, IMAGE_SIZES.LARGE);
+
         return {
           backgroundImage: `url(${image})`,
         };
       },
-      userAvatar() {
+      avatar() {
         return getImageUrl(this.user.avatar_url);
       },
       title() {
@@ -79,6 +81,6 @@
         });
       },
     },
-    props: ['songId', 'song', 'user', 'authedUser', 'authedLikes', 'isActive', 'songIndex', 'playlist'],
+    props: ['authedLikes', 'authedUser', 'isActive', 'playlist', 'song', 'songId', 'songIndex', 'user'],
   };
 </script>

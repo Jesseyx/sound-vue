@@ -7,7 +7,7 @@
     <div class="nav-playlist-images">
       <authed-playlist-image
         v-for="songId in songIds"
-        :songId="songId"
+        :song="songEntities[songId]"
       >
       </authed-playlist-image>
     </div>
@@ -17,8 +17,6 @@
 <style></style>
 
 <script>
-  import { mapGetters } from 'vuex';
-
   import AuthedPlaylistImage from './AuthedPlaylistImage.vue';
 
   export default {
@@ -26,15 +24,15 @@
       AuthedPlaylistImage,
     },
     computed: {
-      ...mapGetters(['playlistEntities']),
       title() {
-        const playlist = this.playlistEntities[this.playlistId];
+        const { playlist } = this;
+
         return `${playlist.title} (${playlist.track_count})`;
       },
       songIds() {
-        return this.playlistEntities[this.playlistId].tracks.slice(0, 10);
+        return this.playlist.tracks.slice(0, 10);
       },
     },
-    props: ['playlistId'],
+    props: ['playlistId', 'playlist', 'songEntities'],
   };
 </script>

@@ -11,27 +11,29 @@
         </div>
         
         <div class="nav-nav-item" v-if="authedUser">
-          <router-link class="nav-nav-user-link" active-class="active" :to="{ name: 'stream' }">
+          <router-link class="nav-nav-user-link" :to="{ name: 'stream' }" active-class="active">
             <span class="nav-nav-user-link-text">stream</span>
           </router-link>
         </div>
 
         <div class="nav-nav-item" v-if="authedUser">
-          <router-link class="nav-nav-user-link" active-class="active" :to="{ name: 'likes' }">
+          <router-link class="nav-nav-user-link" :to="{ name: 'likes' }" active-class="active">
             <span class="nav-nav-user-link-text">likes</span>
           </router-link>
         </div>
 
         <popover class="nav-nav-item nav-playlists" v-if="authedUser">
-          <div class="nav-nav-user-link" :class="{ active: playlistsSelected }" slot="content">
-            <span class="nav-nav-user-link-text">playlist</span>
+          <div class="nav-nav-user-link" :class="{ active: selected }" slot="content">
+            <span class="nav-nav-user-link-text">{{ playlistName }}</span>
             <i class="icon ion-chevron-down"></i>
             <i class="icon ion-chevron-up"></i>
           </div>
           <div class="nav-playlists-popover popover-content" slot="bomb">
             <authed-playlist
               v-for="playlistId in authedPlaylists"
+              :playlist="playlistEntities[playlistId]"
               :playlistId="playlistId"
+              :songEntities="songEntities"
             >
             </authed-playlist>
           </div>
@@ -45,7 +47,7 @@
         <div class="nav-nav-item">
           <popover class="nav-user" v-if="authedUser">
             <div class="nav-user-link" slot="content">
-              <img class="nav-authed-image" :src="userAvatar" alt="User avatar" />
+              <img class="nav-authed-image" :src="avatar" alt="User avatar" />
               <i class="icon ion-chevron-down"></i>
               <i class="icon ion-chevron-up"></i>
             </div>
@@ -98,12 +100,21 @@
       AuthedPlaylist,
     },
     computed: {
-      ...mapGetters(['authedUser', 'authedPlaylists']),
-      userAvatar() {
+      avatar() {
         return getImageUrl(this.authedUser.avatar_url);
       },
-      playlistsSelected() {
+      selected() {
         return this.$route.name === 'playlists';
+      },
+      playlistName() {
+        const { id } = this.$route.params;
+        const { playlistEntities } = this;
+
+        if (this.selected && (id in playlistEntities)) {
+          return playlistEntities[id].title;
+        }
+
+        return 'playlist';
       },
     },
     methods: {
@@ -115,5 +126,6 @@
         this.$store.dispatch('logoutUser');
       },
     },
+    props: ['authedPlaylists', 'authedUser', 'playlistEntities', 'songEntities'],
   };
 </script>

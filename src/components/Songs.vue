@@ -8,14 +8,14 @@
 
     <div class="container">
       <song-cards
+        :authedLikes="authedLikes"
+        :authedUser="authedUser"
+        :eHeight="eHeight"
+        :playingSongId="playingSongId"
         :playlist="playlist"
         :playlistData="playlistData"
         :songEntities="songEntities"
         :userEntities="userEntities"
-        :authedUser="authedUser"
-        :playingSongId="playingSongId"
-        :authedLikes="authedLikes"
-        :eHeight="eHeight"
       >
       </song-cards>
     </div>
@@ -62,10 +62,10 @@
     },
     beforeMount() {
       const { playlist, playlistData } = this;
-      if (!playlistData.items) {
+      if (!playlistData.items || playlistData.items.length === 0) {
         this.$store.dispatch('fetchSongsIfNeeded', playlist);
       }
     },
-    props: ['playlistData', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'time', 'playlist', 'playingSongId', 'eHeight'],
+    props: ['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlist', 'playlistData', 'songEntities', 'time','userEntities'],
   };
 </script>
