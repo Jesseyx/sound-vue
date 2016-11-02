@@ -24,8 +24,9 @@ export default {
       // add new reactivity object
       Vue.set(state, playlist, obj);
     } else {
-      state[playlist].isFetching = true;
-      state[playlist].nextUrl = null;
+      // You need to detect the entire list of data changes, so don't set every, set integral.
+      // Equal: Object.assign(state[playlist], { isFetching: true, nextUrl: null });
+      state[playlist] = { ...state[playlist], isFetching: true, nextUrl: null };
     }
   },
 
@@ -41,11 +42,9 @@ export default {
       // add new reactivity object
       Vue.set(state, playlist, obj);
     } else {
+      // see above
       const currentList = state[playlist];
-      currentList.isFetching = false;
-      currentList.items = [...currentList.items, ...songs];
-      currentList.nextUrl = nextUrl;
-      currentList.futureUrl = futureUrl;
+      state[playlist] = { ...currentList, isFetching: false, items: [ ...currentList.items, ...songs ], nextUrl, futureUrl };
     }
   },
 

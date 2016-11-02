@@ -45,13 +45,11 @@
     },
     computed: {
       isFetching() {
-        const { playlist, playlists } = this;
-        const data = playlist in playlists ? playlists[playlist] : {};
-        return data.isFetching;
+        return this.playlistData.isFetching;
       },
       normalized() {
-        const { end, start, chunk, playlist, playlists } = this;
-        const items = playlist in playlists ? playlists[playlist].items : [];
+        const { end, start, chunk, playlistData } = this;
+        const items = playlistData.items ? playlistData.items : [];
         const result = [];
 
         for (let i = start; i < end; i += chunk) {
@@ -88,8 +86,8 @@
       },
 
       getScrollState() {
-        const { eHeight, playlist, playlists } = this;
-        const items = playlist in playlists ? playlists[playlist].items : [];
+        const { eHeight, playlistData } = this;
+        const items = playlistData.items ? playlistData.items : [];
 
         const MARGIN_TOP = 20;
         const ROW_HEIGHT = 132;
@@ -127,8 +125,11 @@
         };
       },
     },
-    beforeUpdate() {
-      this.checkIfUpdateData();
+    watch: {
+      playlistData() {
+        console.log('playlistData, changed');
+        this.checkIfUpdateData();
+      },
     },
     mounted() {
       window.addEventListener('scroll', this.onScroll, false);
@@ -136,6 +137,6 @@
     beforeDestroy() {
       window.removeEventListener('scroll', this.onScroll, false);
     },
-    props: ['playlist', 'playlists', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'playingSongId', 'eHeight'],
+    props: ['playlist', 'playlistData', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'playingSongId', 'eHeight'],
   };
 </script>

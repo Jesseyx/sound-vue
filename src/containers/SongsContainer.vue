@@ -1,6 +1,6 @@
 <template>
   <songs
-    :playlists="playlists"
+    :playlistData="playlistData"
     :songEntities="songEntities"
     :userEntities="userEntities"
     :authedUser="authedUser"
@@ -40,6 +40,10 @@
           time,
           playlist,
         };
+      },
+      playlistData() {
+        const { info, playlists } = this;
+        return info.playlist in playlists ? playlists[info.playlist] : {};
       },
     },
   };

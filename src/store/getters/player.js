@@ -21,5 +21,5 @@ export const currentSongIndex = (state) => {
 };
 
 export const player = (state) => {
-  return state;  
+  return state;
 };

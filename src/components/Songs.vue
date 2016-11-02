@@ -9,7 +9,7 @@
     <div class="container">
       <song-cards
         :playlist="playlist"
-        :playlists="playlists"
+        :playlistData="playlistData"
         :songEntities="songEntities"
         :userEntities="userEntities"
         :authedUser="authedUser"
@@ -54,17 +54,18 @@
     },
     watch: {
       playlist(nextPlaylist) {
-        if (!(nextPlaylist in this.playlists) || this.playlists[nextPlaylist].items.length === 0) {
+        const { playlistData } = this;
+        if (!playlistData.items || playlistData.items.length === 0) {
           this.$store.dispatch('fetchSongsIfNeeded', nextPlaylist);
         }
       },
     },
     beforeMount() {
-      const { playlist, playlists } = this;
-      if (!(playlist in playlists)) {
+      const { playlist, playlistData } = this;
+      if (!playlistData.items) {
         this.$store.dispatch('fetchSongsIfNeeded', playlist);
       }
     },
-    props: ['playlists', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'time', 'playlist', 'playingSongId', 'eHeight'],
+    props: ['playlistData', 'songEntities', 'userEntities', 'authedUser', 'authedLikes', 'time', 'playlist', 'playingSongId', 'eHeight'],
   };
 </script>
