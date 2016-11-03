@@ -7,6 +7,9 @@
     :playlists="playlists"
     :song="song"
     :user="user"
+    :currentSongIndex="currentSongIndex"
+    :selectedPlaylists="selectedPlaylists"
+    :songEntities="songEntities"
   >
   </player>
 </template>
@@ -22,7 +25,7 @@
       Player,
     },
     computed: {
-      ...mapGetters(['currentTime', 'isPlaying', 'playingSongId', 'playlists', 'songEntities', 'userEntities']),
+      ...mapGetters(['currentTime', 'isPlaying', 'playingSongId', 'playlists', 'songEntities', 'userEntities', 'currentSongIndex', 'selectedPlaylists']),
       song() {
         const { songEntities, playingSongId } = this;
         return songEntities[playingSongId];

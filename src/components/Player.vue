@@ -44,6 +44,10 @@
           :volume="volume"
           :changeVolume="changeVolume"
           :handleVolumeMouseDown="handleVolumeMouseDown"
+          :currentSongIndex="currentSongIndex"
+          :selectedPlaylists="selectedPlaylists"
+          :playlists="playlists"
+          :songEntities="songEntities"
           ref="rightControlComponent"
         >
         </right-control>
@@ -276,7 +280,7 @@
         }
       },
     },
-    props: ['currentTime', 'isPlaying', 'playingSongId', 'playlists', 'song', 'user'],
+    props: ['currentTime', 'isPlaying', 'playingSongId', 'playlists', 'song', 'user', 'currentSongIndex',  'selectedPlaylists', 'songEntities'],
     mounted() {
       document.addEventListener('keydown', this.handleKeyDown, false);
 

@@ -11,8 +11,14 @@
 
     <popover class="player-button top-right">
       <i class="icon ion-android-list" slot="content"></i>
-      <div class="" slot="bomb">
-      </div>
+      <playlist
+        :currentSongIndex="currentSongIndex"
+        :selectedPlaylists="selectedPlaylists"
+        :playlists="playlists"
+        :songEntities="songEntities"
+        slot="bomb"
+      >
+      </playlist>
     </popover>
 
     <div class="player-button player-volume-button" @click="toggleMute">
@@ -49,11 +55,13 @@
 
 <script>
   import Popover from '../Popover.vue';
+  import Playlist from '../Playlist.vue';
 
   export default {
-    props: ['repeat', 'toggleRepeat', 'shuffle', 'toggleShuffle', 'muted', 'toggleMute', 'volume', 'changeVolume', 'handleVolumeMouseDown'],
+    props: ['repeat', 'toggleRepeat', 'shuffle', 'toggleShuffle', 'muted', 'toggleMute', 'volume', 'changeVolume', 'handleVolumeMouseDown', 'currentSongIndex', 'selectedPlaylists', 'playlists', 'songEntities'],
     components: {
       Popover,
+      Playlist,
     },
     computed: {
       volumeStyle() {
