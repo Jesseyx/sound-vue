@@ -52,7 +52,7 @@ export function fetchSongs(context, { url, playlist }) {
     .catch((err) => { throw err; });
 }
 
-function requestSongs({ commit }, playlist) {
+export function requestSongs({ commit }, playlist) {
   commit(types.REQUEST_SONGS, playlist);
 }
 

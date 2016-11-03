@@ -30,11 +30,14 @@
 
   export default {
     data() {
+      // when in the same router-view, watch playlistData trigger, when switching views this should recalculate
+      const items = this.playlistData.items || [];
+
       return {
         paddingBottom: 0,
         paddingTop: 0,
         start: 0,
-        end: 0,
+        end: items.length,
 
         chunk: 5,
       };

@@ -5,7 +5,7 @@ import { normalize, arrayOf } from 'normalizr';
 import { CLIENT_ID } from '../../constants/Config';
 import { SC_API_URL } from '../../constants/Api';
 import * as types from '../../constants/mutation-types';
-import { fetchSongs, receiveSongs } from './playlists';
+import { fetchSongs, requestSongs, receiveSongs } from './playlists';
 import { AUTHED_PLAYLIST_SUFFIX } from '../../constants/PlaylistConstants';
 import { songSchema, playlistSchema, userSchema } from '../../constants/Schemes';
 import { changePlayingSong } from './player';
@@ -54,6 +54,9 @@ function fetchStream(context, accessToken) {
 }
 
 function fetchLikes(context, accessToken) {
+  const playlist = `likes${AUTHED_PLAYLIST_SUFFIX}`;
+  requestSongs(context, playlist);
+
   fetch(`${SC_API_URL}/me/favorites?oauth_token=${accessToken}`)
     .then(response => response.json())
     .then((json) => {
@@ -62,9 +65,13 @@ function fetchLikes(context, accessToken) {
       const likes = normalized.result
         .reduce((obj, songId) => Object.assign({}, obj, { [songId]: 1 }), {});
 
-      context.commit(types.RECEIVE_LIKES, likes);
-      receiveSongs(context, normalized.entities, normalized.result, `likes${AUTHED_PLAYLIST_SUFFIX}`);
+      receiveLikes(context, likes);
+      receiveSongs(context, normalized.entities, normalized.result, playlist);
     });
+}
+
+function receiveLikes({ commit }, likes) {
+  commit(types.RECEIVE_LIKES, likes);
 }
 
 function fetchPlaylists(context, accessToken) {

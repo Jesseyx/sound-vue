@@ -1,4 +1,5 @@
 import SongsContainer from '../containers/SongsContainer.vue';
+import MeContainer from '../containers/MeContainer.vue';
 
 const routes = [
   {
@@ -13,6 +14,7 @@ const routes = [
   },
   {
     path: '/me',
+    component: resolve => resolve(MeContainer),
     children: [
       {
         path: 'stream',

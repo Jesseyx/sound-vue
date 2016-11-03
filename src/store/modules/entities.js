@@ -5,6 +5,7 @@ import * as getters from '../getters/entities';
 const state = {
   songs: {},
   users: {},
+  // authedPlaylists
   playlists: {},
 };
 
