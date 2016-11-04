@@ -10,7 +10,7 @@ const routes = [
   },
   {
     path: '/songs/:id',
-    name: 'songDetail',
+    name: 'song',
   },
   {
     path: '/me',
@@ -32,7 +32,7 @@ const routes = [
   },
   {
     path: '/users/:id',
-    name: 'userDetail',
+    name: 'user',
   },
 ];
 

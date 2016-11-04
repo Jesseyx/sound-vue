@@ -5,7 +5,7 @@
       <router-link
         class="song-card-title"
         :title="song.title"
-        :to="{ name: 'songDetail', params: { id: song.id } }"
+        :to="{ name: 'song', params: { id: song.id } }"
       >
         {{ formatTitle }}
       </router-link>
@@ -13,7 +13,7 @@
       <router-link
         class="song-card-user-username"
         :title="user.username"
-        :to="{ name: 'userDetail', params: { id: user.id } }"
+        :to="{ name: 'user', params: { id: user.id } }"
       >
         {{ user.username }}
       </router-link>
