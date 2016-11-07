@@ -1,5 +1,5 @@
 <template>
-  <Sidebar>
+  <StickyWrapper class="sidebar">
     <div class="comments" :class="{ timed: isActive && timedComments }">
       <div class="comments-header">
         <div class="comments-header-title">Comments</div>
@@ -23,13 +23,13 @@
         </Comment>
       </SidebarContent>
     </div>
-  </Sidebar>
+  </StickyWrapper>
 </template>
 
 <style></style>
 
 <script>
-  import Sidebar from './Sidebar.vue';
+  import StickyWrapper from './StickyWrapper.vue';
   import Switch from './Switch.vue';
   import SidebarContent from './SidebarContent.vue';
   import Comment from './Comment.vue';
@@ -44,7 +44,7 @@
       };
     },
     components: {
-      Sidebar,
+      StickyWrapper,
       SwitchBtn: Switch,
       SidebarContent,
       Comment,

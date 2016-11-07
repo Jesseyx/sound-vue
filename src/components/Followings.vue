@@ -1,5 +1,5 @@
 <template>
-  <Sidebar>
+  <StickyWrapper class="sidebar">
     <div class="followings" v-if="user && user.followings">
       <div class="followings-header">
         <div class="followings-title">
@@ -17,19 +17,19 @@
         </UserCard>
       </SidebarContent>
     </div>
-  </Sidebar>
+  </StickyWrapper>
 </template>
 
 <style></style>
 
 <script>
-  import Sidebar from './Sidebar.vue';
+  import StickyWrapper from './StickyWrapper.vue';
   import SidebarContent from './SidebarContent.vue';
   import UserCard from './UserCard.vue';
 
   export default {
     components: {
-      Sidebar,
+      StickyWrapper,
       SidebarContent,
       UserCard,
     },

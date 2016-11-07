@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" :class="{ sticky: sticky }" v-sticky="handleSticky" sticky-critical="50">
+  <div :class="{ sticky: sticky }" v-sticky="handleSticky" sticky-critical="50">
     <slot></slot>
   </div>
 </template>

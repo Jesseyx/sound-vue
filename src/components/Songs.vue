@@ -1,5 +1,5 @@
 <template>
-  <div class="songs" :class="{ sticky: sticky }" v-sticky="handleSticky" sticky-critical="50">
+  <StickyWrapper class="songs">
     <toolbar
       :playlist="playlist"
       :time="time"
@@ -19,38 +19,21 @@
       >
       </song-cards>
     </div>
-  </div>
+  </StickyWrapper>
 </template>
 
 <style></style>
 
 <script>
+  import StickyWrapper from './StickyWrapper.vue';
   import Toolbar from '../components/Toolbar.vue';
   import SongCards from '../components/SongCards.vue';
 
-  import Sticky from '../directives/Sticky';
-
   export default {
-    data() {
-      return {
-        sticky: false,
-      };
-    },
     components: {
+      StickyWrapper,
       Toolbar,
       SongCards,
-    },
-    directives: {
-      Sticky,
-    },
-    methods: {
-      handleSticky(sticky) {
-        if (sticky && !this.sticky) {
-          this.sticky = sticky;
-        } else if (!sticky && this.sticky) {
-          this.sticky = sticky;
-        }
-      },
     },
     watch: {
       playlist(nextPlaylist) {
