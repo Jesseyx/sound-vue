@@ -101,7 +101,8 @@
     },
     methods: {
       toggleFollow() {
-        console.log('toggleFollow');
+        const { userId } = this;
+        this.$store.dispatch('toggleFollow', userId);
       },
       playSong(index) {
         const { playlist } = this;

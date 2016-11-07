@@ -26,6 +26,10 @@ export default {
     state.likes = { ...state.likes, [songId]: liked };
   },
 
+  [types.SET_FOLLOWING] (state, { userId, following }) {
+    state.followings = { ...state.followings, [userId]: following };
+  },
+
   [types.RESET_AUTHED] (state, playlists) {
     state.accessToken = null;
     state.followings = {};

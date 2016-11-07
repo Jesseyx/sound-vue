@@ -190,3 +190,25 @@ function syncLike(accessToken, songId, liked) {
     { method: liked ? 'put' : 'delete' }
   );
 }
+
+export function toggleFollow(context, userId) {
+  const { authedFollowings, accessToken } = context.getters;
+  const following = userId in authedFollowings && authedFollowings[userId] === 1 ? 0 : 1;
+
+  setFollowing(context, userId, following);
+  syncFollowing(accessToken, userId, following);
+}
+
+function setFollowing({ commit }, userId, following) {
+  commit(types.SET_FOLLOWING, {
+    userId,
+    following,
+  });
+}
+
+function syncFollowing(accessToken, userId, following) {
+  fetch(
+    `${SC_API_URL}/me/followings/${userId}?oauth_token=${accessToken}`,
+    { method: following ? 'put' : 'delete' }
+  );
+}
