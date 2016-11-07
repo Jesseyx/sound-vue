@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" :class="{ sticky: sticky }" v-sticky="handleSticky" sticky-critical="50">
+  <Sidebar>
     <div class="followings" v-if="user && user.followings">
       <div class="followings-header">
         <div class="followings-title">
@@ -17,23 +17,19 @@
         </UserCard>
       </SidebarContent>
     </div>
-  </div>
+  </Sidebar>
 </template>
 
 <style></style>
 
 <script>
-  import Sticky from '../directives/Sticky';
+  import Sidebar from './Sidebar.vue';
   import SidebarContent from './SidebarContent.vue';
   import UserCard from './UserCard.vue';
 
   export default {
-    data() {
-      return {
-        sticky: false,
-      };
-    },
     components: {
+      Sidebar,
       SidebarContent,
       UserCard,
     },
@@ -41,18 +37,6 @@
       followings() {
         const { user, userEntities } = this;
         return user.followings.map(followingId => userEntities[followingId]);
-      },
-    },
-    directives: {
-      Sticky,
-    },
-    methods: {
-      handleSticky(sticky) {
-        if (sticky && !this.sticky) {
-          this.sticky = sticky;
-        } else if (!sticky && this.sticky) {
-          this.sticky = sticky;
-        }
       },
     },
     props: ['eHeight', 'user', 'userEntities'],

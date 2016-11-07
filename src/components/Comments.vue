@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" :class="{ sticky: sticky }" v-sticky="handleSticky" sticky-critical="50">
+  <Sidebar>
     <div class="comments" :class="{ timed: isActive && timedComments }">
       <div class="comments-header">
         <div class="comments-header-title">Comments</div>
@@ -23,13 +23,13 @@
         </Comment>
       </SidebarContent>
     </div>
-  </div>
+  </Sidebar>
 </template>
 
 <style></style>
 
 <script>
-  import Sticky from '../directives/Sticky';
+  import Sidebar from './Sidebar.vue';
   import Switch from './Switch.vue';
   import SidebarContent from './SidebarContent.vue';
   import Comment from './Comment.vue';
@@ -39,12 +39,12 @@
   export default {
     data() {
       return {
-        sticky: false,
         timedComments: false,
         className: null,
       };
     },
     components: {
+      Sidebar,
       SwitchBtn: Switch,
       SidebarContent,
       Comment,
@@ -68,17 +68,7 @@
           .sort((a, b) => a.timestamp - b.timestamp);
       },
     },
-    directives: {
-      Sticky,
-    },
     methods: {
-      handleSticky(sticky) {
-        if (sticky && !this.sticky) {
-          this.sticky = sticky;
-        } else if (!sticky && this.sticky) {
-          this.sticky = sticky;
-        }
-      },
       toggleTimedComments() {
         this.timedComments = !this.timedComments;
       },
