@@ -67,7 +67,8 @@ function fetchLikes(context, accessToken) {
         .reduce((obj, songId) => Object.assign({}, obj, { [songId]: 1 }), {});
 
       receiveLikes(context, likes);
-      receiveSongs(context, normalized.entities, normalized.result, playlist);
+      receiveEntities(context, normalized.entities);
+      receiveSongs(context, normalized.result, playlist, null);
     });
 }
 
@@ -87,7 +88,7 @@ function fetchPlaylists(context, accessToken) {
 
       normalized.result.forEach((playlistId) => {
         const playlist = normalized.entities.playlists[playlistId];
-        receiveSongs(context, {}, playlist.tracks, playlist.title + AUTHED_PLAYLIST_SUFFIX);
+        receiveSongs(context, playlist.tracks, playlist.title + AUTHED_PLAYLIST_SUFFIX);
       });
     })
     .catch((err) => { throw err; });
