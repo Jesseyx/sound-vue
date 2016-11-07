@@ -48,3 +48,15 @@ export function constructUrl(cat) {
 
   return result;
 }
+
+export function constructSongUrl(songId) {
+  return `${SC_API_URL}/tracks/${songId}?client_id=${CLIENT_ID}`;
+}
+
+export function constructUserSongsUrl(userId) {
+  return `${SC_API_URL}/users/${userId}/tracks?client_id=${CLIENT_ID}`;
+}
+
+export function constructSongCommentsUrl(songId) {
+  return `${SC_API_URL}/tracks/${songId}/comments?client_id=${CLIENT_ID}`;
+}

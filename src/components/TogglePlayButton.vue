@@ -11,7 +11,18 @@
   export default {
     methods: {
       togglePlay() {
-        console.log('togglePlay');
+        const { isPlaying } = this;
+        const audioElement = document.getElementById('audio');
+
+        if (!audioElement) {
+          return;
+        }
+
+        if (isPlaying) {
+          audioElement.pause();
+        } else {
+          audioElement.play();
+        }
       },
     },
     props: ['isPlaying'],

@@ -4,6 +4,7 @@ import * as types from '../../constants/mutation-types';
 import { GENRES_MAP } from '../../constants/SongConstants';
 import { songSchema } from '../../constants/Schemes';
 import { constructUrl } from '../../utils/SongUtils';
+import { receiveEntities } from './entities';
 
 export function fetchSongs(context, { url, playlist }) {
   requestSongs(context, playlist);
@@ -47,7 +48,8 @@ export function fetchSongs(context, { url, playlist }) {
         return arr;
       }, []);
 
-      receiveSongs(context, normalized.entities, result, playlist, nextUrl, futureUrl)
+      receiveEntities(context, normalized.entities);
+      receiveSongs(context, result, playlist, nextUrl, futureUrl)
     })
     .catch((err) => { throw err; });
 }
@@ -56,8 +58,7 @@ export function requestSongs({ commit }, playlist) {
   commit(types.REQUEST_SONGS, playlist);
 }
 
-export function receiveSongs({ commit }, entities, songs, playlist, nextUrl = null, futureUrl = null) {
-  commit(types.RECEIVE_ENTITIES, entities);
+export function receiveSongs({ commit }, songs, playlist, nextUrl = null, futureUrl = null) {
   commit(types.RECEIVE_SONGS, {
     songs,
     playlist,

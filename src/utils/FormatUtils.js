@@ -27,3 +27,11 @@ export function formatSeconds(num) {
 
   return `${minutes}:${seconds}`;
 }
+
+export function addCommas(i) {
+  if (i === null || i === undefined) {
+    return '';
+  }
+
+  return i.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}

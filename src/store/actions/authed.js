@@ -9,6 +9,7 @@ import { fetchSongs, requestSongs, receiveSongs } from './playlists';
 import { AUTHED_PLAYLIST_SUFFIX } from '../../constants/PlaylistConstants';
 import { songSchema, playlistSchema, userSchema } from '../../constants/Schemes';
 import { changePlayingSong } from './player';
+import { receiveEntities } from './entities';
 
 const COOKIE_PATH = 'accessToken';
 
@@ -81,8 +82,8 @@ function fetchPlaylists(context, accessToken) {
       console.log(json);
       const normalized = normalize(json, arrayOf(playlistSchema));
       console.log(normalized);
-      context.commit(types.RECEIVE_AUTHED_PLAYLISTS, normalized.result);
-      context.commit(types.RECEIVE_ENTITIES, normalized.entities);
+      receiveAuthedPlaylists(context, normalized.result);
+      receiveEntities(context, normalized.entities);
 
       normalized.result.forEach((playlistId) => {
         const playlist = normalized.entities.playlists[playlistId];
@@ -90,6 +91,10 @@ function fetchPlaylists(context, accessToken) {
       });
     })
     .catch((err) => { throw err; });
+}
+
+function receiveAuthedPlaylists({ commit }, playlists) {
+  commit(types.RECEIVE_AUTHED_PLAYLISTS, playlists);
 }
 
 function fetchFollowings(context, accessToken) {
@@ -103,13 +108,13 @@ function fetchFollowings(context, accessToken) {
     .then((normalized) => {
       const users = normalized.result
         .reduce((obj, userId) => Object.assign({}, obj, { [userId]: 1 }), {});
-      receiveAuthedFollowings(context, users, normalized.entities);
+      receiveEntities(context, normalized.entities);
+      receiveAuthedFollowings(context, users);
     })
     .catch((err) => { throw err; });
 }
 
-function receiveAuthedFollowings({ commit }, users, entities) {console.log('receiveAuthedFollowings');console.log(entities);
-  commit(types.RECEIVE_ENTITIES, entities);
+function receiveAuthedFollowings({ commit }, users) {console.log('receiveAuthedFollowings');
   commit(types.RECEIVE_AUTHED_FOLLOWINGS, users);
 }
 

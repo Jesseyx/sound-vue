@@ -26,3 +26,8 @@ export const TOGGLE_IS_PLAYING = 'TOGGLE_IS_PLAYING';
 // environment
 export const CHANGE_IS_MOBILE = 'CHANGE_IS_MOBILE';
 export const CHANGE_WIDTH_AND_HEIGHT = 'CHANGE_WIDTH_AND_HEIGHT';
+
+// song
+export const REQUEST_SONG = 'REQUEST_SONG';
+export const RECEIVE_SONG = 'RECEIVE_SONG';
+// export const RECEIVE_SONG_COMMENTS = 'RECEIVE_SONG_COMMENTS';
