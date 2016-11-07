@@ -1,6 +1,7 @@
 import SongsContainer from '../containers/SongsContainer.vue';
 import MeContainer from '../containers/MeContainer.vue';
 import SongContainer from '../containers/SongContainer.vue';
+import UserContainer from '../containers/UserContainer.vue';
 
 const routes = [
   {
@@ -35,6 +36,7 @@ const routes = [
   {
     path: '/users/:id',
     name: 'user',
+    component: resolve => resolve(UserContainer),
   },
 ];
 

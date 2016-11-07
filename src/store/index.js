@@ -8,6 +8,7 @@ import player from './modules/player';
 import environment from './modules/environment';
 
 import * as songsAction from './actions/songs';
+import * as usersAction from './actions/users';
 
 import plugins from './plugins';
 
@@ -15,7 +16,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   // resolve other actions
-  actions: { ...songsAction },
+  actions: { ...songsAction, ...usersAction },
   modules: {
     authed,
     playlists,

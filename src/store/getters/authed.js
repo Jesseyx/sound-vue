@@ -13,3 +13,7 @@ export const authedPlaylists = (state) => {
 export const authedLikes = (state) => {
   return state.likes;
 };
+
+export const authedFollowings = (state) => {
+  return state.followings;
+};

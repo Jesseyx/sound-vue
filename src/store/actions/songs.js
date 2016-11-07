@@ -76,16 +76,14 @@ function fetchRelatedSongs(context, userId, songTitle) {
 function fetchSongComments(context, songId) {
   return fetch(constructSongCommentsUrl(songId))
     .then(response => response.json())
-    .then(json => receiveSongComments(context, songId, json))
+    .then(json => {
+      const entities = { songs: { [songId]: { comments: json } } };
+      receiveEntities(context, entities);
+      // receiveSongComments(context, songId);
+    })
     .catch((err) => { throw err; });
 }
 
-function receiveSongComments(context, songId, comments) {
-  receiveEntities(context, {
-    songs: {
-      [songId]: {
-        comments,
-      },
-    },
-  });
+function receiveSongComments({ commit }, songId) {
+  commit(types.RECEIVE_SONG_COMMENTS, songId);
 }
