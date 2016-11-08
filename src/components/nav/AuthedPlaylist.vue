@@ -8,6 +8,7 @@
       <authed-playlist-image
         v-for="songId in songIds"
         :song="songEntities[songId]"
+        :key="songId"
       >
       </authed-playlist-image>
     </div>

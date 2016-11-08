@@ -6,6 +6,7 @@
       v-for="(item, index) in normalized"
       :authedLikes="authedLikes"
       :authedUser="authedUser"
+      :start="start"
       :chunk="chunk"
       :index="index"
       :list="item"
@@ -13,6 +14,7 @@
       :playlist="playlist"
       :songEntities="songEntities"
       :userEntities="userEntities"
+      :key="`songs-row-${(start/chunk) + index}`"
     >
     </s-row>
 
@@ -51,7 +53,7 @@
         return this.playlistData.isFetching;
       },
       normalized() {
-        const { end, start, chunk, playlistData } = this;
+        const { end, start, chunk, playlistData } = this;console.log('start = ' + start);
         const items = playlistData.items ? playlistData.items : [];
         const result = [];
 

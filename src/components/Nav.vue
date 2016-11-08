@@ -34,6 +34,7 @@
               :playlist="playlistEntities[playlistId]"
               :playlistId="playlistId"
               :songEntities="songEntities"
+              :key="playlistId"
             >
             </authed-playlist>
           </div>

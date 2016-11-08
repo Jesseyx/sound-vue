@@ -11,6 +11,7 @@
       :playSong="playSong"
       :index="i + 1"
       v-for="(relatedSongId, i) in relatedSongItems"
+      :key="relatedSongId"
     >
     </SongListItem>
   </div>

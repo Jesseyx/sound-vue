@@ -7,6 +7,7 @@
       <Profile
         v-for="profile in normalized"
         :profile="profile"
+        :key="profile.id"
       >
       </Profile>
     </template>

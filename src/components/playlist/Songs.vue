@@ -6,6 +6,7 @@
       :isActiveSong="playerIsShownCurrentPlaylist && currentSongIndex === i"
       :playSong="playSong"
       :index="i"
+      :key="`${songId}-${i}`"
     >
     </song-item>
   </ul>

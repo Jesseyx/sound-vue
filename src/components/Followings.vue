@@ -13,6 +13,7 @@
         <UserCard
           v-for="following in followings"
           :user="following"
+          :key="following.id"
         >
         </UserCard>
       </SidebarContent>

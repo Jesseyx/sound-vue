@@ -7,6 +7,7 @@
           :class="{ active: g === genre }"
           v-for="g in genres"
           :to="{ name: 'songs', query: { q: g, t: time} }"
+          :key="g"
         >
           {{ g }}
         </router-link>
@@ -19,6 +20,7 @@
             :class="{ active: t === time }"
             v-for="t in days"
             :to="{ name: 'songs', query: { q: genre, t: t } }"
+            :key="t"
           >
             {{ `${t} days` }}
           </router-link>

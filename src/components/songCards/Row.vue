@@ -1,6 +1,6 @@
 <template>
   <div class="songs-row grid">
-    <div class="col-1-5 clearfix" v-for="(id, index) in list">
+    <div class="col-1-5 clearfix" v-for="(id, index) in list" :key="`${(baseIndex + index)}-${id}`">
       <card
         :authedLikes="authedLikes"
         :authedUser="authedUser"
@@ -14,7 +14,7 @@
       </card>
     </div>
 
-    <div class="col-1-5" v-for="id in paddingNum"></div>
+    <div class="col-1-5" v-for="id in paddingNum" :key="`song-placeholder-${(baseIndex + id)}`"></div>
   </div>
 </template>
 
@@ -32,9 +32,10 @@
         return (this.chunk - this.list.length);
       },
       baseIndex() {
-        return this.chunk * this.index;
+        const { start, chunk, index } = this;
+        return (start + (chunk * index));
       },
     },
-    props: ['authedLikes', 'authedUser', 'chunk', 'index', 'list', 'playingSongId', 'playlist', 'songEntities', 'userEntities'],
+    props: ['authedLikes', 'authedUser', 'start', 'chunk', 'index', 'list', 'playingSongId', 'playlist', 'songEntities', 'userEntities'],
   };
 </script>
