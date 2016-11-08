@@ -18,7 +18,7 @@
           v-for="(comment, i) in normalized"
           :comment="comment"
           :index="i"
-          :key="i"
+          :key="comment.id"
         >
         </Comment>
       </SidebarContent>
@@ -39,6 +39,7 @@
   export default {
     data() {
       return {
+        selfCurrentTime: this.currentTime || 0,
         timedComments: false,
         className: null,
       };
@@ -51,14 +52,14 @@
     },
     computed: {
       normalized() {
-        const { comments, isActive, timedComments, currentTime } = this;
+        const { comments, isActive, timedComments, selfCurrentTime } = this;
 
         if (isActive && timedComments) {
           return comments
             .slice()
             .filter((comment) => {
               const commentTime = comment.timestamp / 1000;
-              return commentTime >= currentTime && commentTime < (currentTime + COMMENTS_REFRESH_RATE);
+              return commentTime >= selfCurrentTime && commentTime < (selfCurrentTime + COMMENTS_REFRESH_RATE);
             })
             .sort((a, b) => a.timestamp - b.timestamp);
         }
@@ -66,6 +67,23 @@
         return comments
           .slice()
           .sort((a, b) => a.timestamp - b.timestamp);
+      },
+    },
+    watch: {
+      currentTime(nextCurrentTime) {
+        const { selfCurrentTime, timedComments, isActive } = this;
+        if (!timedComments || !isActive) {
+          return;
+        }
+
+        if (nextCurrentTime % COMMENTS_REFRESH_RATE === 0
+          || Math.abs(nextCurrentTime - selfCurrentTime) > COMMENTS_REFRESH_RATE) {
+          this.className = 'animate-out';
+          this.$nextTick(() => {
+            this.className = null;
+            this.selfCurrentTime = nextCurrentTime;
+          });
+        }
       },
     },
     methods: {
