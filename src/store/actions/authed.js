@@ -10,6 +10,7 @@ import { AUTHED_PLAYLIST_SUFFIX } from '../../constants/PlaylistConstants';
 import { songSchema, playlistSchema, userSchema } from '../../constants/Schemes';
 import { changePlayingSong } from './player';
 import { receiveEntities } from './entities';
+import router from '../../router';
 
 const COOKIE_PATH = 'accessToken';
 
@@ -42,7 +43,7 @@ function receiveAuthedUserPre(context, accessToken, user, shouldShowStream) {
   fetchFollowings(context, accessToken);
 
   if (shouldShowStream) {
-    console.log('should go to me page');
+    router.push({ name: 'stream' });
   }
 }
 
@@ -146,6 +147,9 @@ export function logoutUser(context) {
   );
 
   // navigateTo
+  if (router.currentRoute.path.indexOf('me') > -1) {
+    router.push({ name: 'songs' });
+  }
 
   // reset
   resetAuthed(context, playlists);
