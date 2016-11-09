@@ -12,7 +12,7 @@ export function playSong(context, { playlist, index }) {
   }
 
   changePlayingSong(context, index);
-};
+}
 
 export function changeCurrentTime({ commit }, time) {
   commit(types.CHANGE_CURRENT_TIME, time);

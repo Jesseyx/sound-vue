@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="padder" :style="{ height: `${paddingTop}px` }"></div>
-    
+
     <s-row
       v-for="(item, index) in normalized"
       :authedLikes="authedLikes"
@@ -32,7 +32,8 @@
 
   export default {
     data() {
-      // when in the same router-view, watch playlistData trigger, when switching views this should recalculate
+      // when in the same router-view,
+      // watch playlistData trigger, when switching views this should recalculate
       const items = this.playlistData.items || [];
 
       return {
@@ -53,7 +54,7 @@
         return this.playlistData.isFetching;
       },
       normalized() {
-        const { end, start, chunk, playlistData } = this;console.log('start = ' + start);
+        const { end, start, chunk, playlistData } = this;
         const items = playlistData.items ? playlistData.items : [];
         const result = [];
 
@@ -105,9 +106,8 @@
         let end = items.length;
 
         if ((scrollY - ((ROW_HEIGHT * 3) + (MARGIN_TOP * 2))) > 0) {
-          const rowsToPad = Math.floor(
-            (scrollY - ((ROW_HEIGHT * 2) + (MARGIN_TOP))) / (ROW_HEIGHT + MARGIN_TOP)
-          );
+          const rowsToPad =
+            Math.floor((scrollY - ((ROW_HEIGHT * 2) + (MARGIN_TOP))) / (ROW_HEIGHT + MARGIN_TOP));
 
           paddingTop = rowsToPad * (ROW_HEIGHT + MARGIN_TOP);
           start = rowsToPad * ITEMS_PER_ROW;

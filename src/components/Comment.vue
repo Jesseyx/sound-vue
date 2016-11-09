@@ -30,7 +30,7 @@
         return this.comment.user;
       },
       avatarUrl() {
-        return getImageUrl(this.user.avatar_url, IMAGE_SIZES.LARGE)
+        return getImageUrl(this.user.avatar_url, IMAGE_SIZES.LARGE);
       },
       time() {
         return formatSeconds(Math.floor(this.comment.timestamp / 1000));

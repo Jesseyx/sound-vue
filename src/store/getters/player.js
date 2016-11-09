@@ -1,25 +1,13 @@
 import { getPlayingSongId } from '../../utils/PlayerUtils';
 
-export const currentTime = (state) => {
-  return state.currentTime;
-};
+export const currentTime = state => state.currentTime;
 
-export const playingSongId = (state, getters) => {
-  return getPlayingSongId(state, getters.playlists);
-};
+export const playingSongId = (state, getters) => getPlayingSongId(state, getters.playlists);
 
-export const selectedPlaylists = (state) => {
-  return state.selectedPlaylists;
-};
+export const selectedPlaylists = state => state.selectedPlaylists;
 
-export const isPlaying = (state) => {
-  return state.isPlaying;
-};
+export const isPlaying = state => state.isPlaying;
 
-export const currentSongIndex = (state) => {
-  return state.currentSongIndex;
-};
+export const currentSongIndex = state => state.currentSongIndex;
 
-export const player = (state) => {
-  return state;
-};
+export const player = state => state;

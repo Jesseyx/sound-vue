@@ -41,12 +41,12 @@
 <style></style>
 
 <script>
-  import SongHeart from '../SongHeart.vue';
-  import TogglePlayButtonContainer from '../../containers/TogglePlayButtonContainer.vue';;
-
   import { IMAGE_SIZES } from '../../constants/SongConstants';
   import { getImageUrl } from '../../utils/SongUtils';
   import { formatSongTitle } from '../../utils/FormatUtils';
+
+  import SongHeart from '../SongHeart.vue';
+  import TogglePlayButtonContainer from '../../containers/TogglePlayButtonContainer.vue';
 
   export default {
     components: {

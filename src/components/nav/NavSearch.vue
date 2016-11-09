@@ -23,10 +23,10 @@
       };
     },
     methods: {
-      handleSearch(e) {
+      handleSearch() {
         const { searchValue } = this;
         if (searchValue !== '') {
-          this.$router.push({ name: 'songs', query: { q: searchValue }});
+          this.$router.push({ name: 'songs', query: { q: searchValue } });
         }
       },
       handleSlashPress(e) {

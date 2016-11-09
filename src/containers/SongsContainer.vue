@@ -27,7 +27,6 @@
     computed: {
       ...mapGetters(['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlists', 'songEntities', 'userEntities']),
       info() {
-        const info = {};
         const { query } = this.$route;
 
         const time = query && query.t ? query.t : null;

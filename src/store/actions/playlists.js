@@ -49,7 +49,7 @@ export function fetchSongs(context, { url, playlist }) {
       }, []);
 
       receiveEntities(context, normalized.entities);
-      receiveSongs(context, result, playlist, nextUrl, futureUrl)
+      receiveSongs(context, result, playlist, nextUrl, futureUrl);
     })
     .catch((err) => { throw err; });
 }
@@ -77,6 +77,8 @@ export function fetchSongsIfNeeded(context, playlist) {
       playlist,
     });
   }
+
+  return null;
 }
 
 function shouldFetchSongs(playlists, playlist) {

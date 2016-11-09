@@ -12,6 +12,7 @@ const throttle = function (fn, delay) {
 
   return function () {
     context = this;
+    /* eslint-disable prefer-rest-params */
     args = arguments;
 
     now = Date.now();
@@ -44,12 +45,17 @@ const getScrollTop = function (element) {
   return element.scrollTop;
 };
 
+/* eslint-disable no-unused-vars */
 const getComputedStyle = document.defaultView.getComputedStyle;
 
+/* eslint-disable no-unused-vars */
 const getScrollEventTarget = function (element) {
   // let currentNode = element;
   // // bugfix, see http://w3help.org/zh-cn/causes/SD9013 and http://stackoverflow.com/questions/17016740/onscroll-function-is-not-working-for-chrome
-  // while (currentNode && currentNode.tagName !== 'HTML' && currentNode.tagName !== 'BODY' && currentNode.nodeType === 1) {
+  // while (currentNode
+  //   && currentNode.tagName !== 'HTML'
+  //   && currentNode.tagName !== 'BODY'
+  //   && currentNode.nodeType === 1) {
   //   const overflowY = getComputedStyle(currentNode).overflowY;
   //   if (overflowY === 'scroll' || overflowY === 'auto') {
   //     return currentNode;
@@ -75,6 +81,23 @@ const getElementTop = function (element) {
   return element.getBoundingClientRect().top + getScrollTop(window);
 };
 
+const doCheck = function () {
+  const scrollEventTarget = this.scrollEventTarget;
+  const distance = this.distance;
+
+  const viewportScrollTop = getScrollTop(scrollEventTarget);
+
+  let result = false;
+
+  if (viewportScrollTop >= distance) {
+    result = true;
+  }
+
+  if (this.expression) {
+    this.expression(result);
+  }
+};
+
 const doBind = function () {
   if (this.binded) return; // eslint-disable-line
   this.binded = true;
@@ -97,23 +120,6 @@ const doBind = function () {
   directive.distance = distance;
 };
 
-const doCheck = function () {
-  const scrollEventTarget = this.scrollEventTarget;
-  const distance = this.distance;
-
-  const viewportScrollTop = getScrollTop(scrollEventTarget);
-
-  let result = false;
-
-  if (viewportScrollTop >= distance) {
-    result = true;
-  }
-
-  if (this.expression) {
-    this.expression(result);
-  }
-};
-
 export default {
   bind(el, binding, vnode) {
     el[ctx] = {
@@ -123,7 +129,7 @@ export default {
     };
 
     const args = arguments;
-    el[ctx].vm.$on('hook:mounted', function () {
+    el[ctx].vm.$on('hook:mounted', () => {
       doBind.call(el[ctx], args);
     });
   },

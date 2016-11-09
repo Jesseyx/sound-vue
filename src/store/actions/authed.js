@@ -115,7 +115,8 @@ function fetchFollowings(context, accessToken) {
     .catch((err) => { throw err; });
 }
 
-function receiveAuthedFollowings({ commit }, users) {console.log('receiveAuthedFollowings');
+function receiveAuthedFollowings({ commit }, users) {
+  console.log('receiveAuthedFollowings');
   commit(types.RECEIVE_AUTHED_FOLLOWINGS, users);
 }
 
@@ -141,7 +142,7 @@ export function logoutUser(context) {
 
   const { authed, entities } = context.rootState;
   const playlists = authed.playlists.map(playlistId =>
-    entities.playlists[playlistId].title + AUTHED_PLAYLIST_SUFFIX
+    entities.playlists[playlistId].title + AUTHED_PLAYLIST_SUFFIX,
   );
 
   // navigateTo
@@ -188,7 +189,7 @@ function setLike({ commit }, payload) {
 function syncLike(accessToken, songId, liked) {
   fetch(
     `${SC_API_URL}/me/favorites/${songId}?oauth_token=${accessToken}`,
-    { method: liked ? 'put' : 'delete' }
+    { method: liked ? 'put' : 'delete' },
   );
 }
 
@@ -210,6 +211,6 @@ function setFollowing({ commit }, userId, following) {
 function syncFollowing(accessToken, userId, following) {
   fetch(
     `${SC_API_URL}/me/followings/${userId}?oauth_token=${accessToken}`,
-    { method: following ? 'put' : 'delete' }
+    { method: following ? 'put' : 'delete' },
   );
 }

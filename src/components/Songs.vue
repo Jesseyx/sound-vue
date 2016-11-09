@@ -49,6 +49,6 @@
         this.$store.dispatch('fetchSongsIfNeeded', playlist);
       }
     },
-    props: ['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlist', 'playlistData', 'songEntities', 'time','userEntities'],
+    props: ['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlist', 'playlistData', 'songEntities', 'time', 'userEntities'],
   };
 </script>

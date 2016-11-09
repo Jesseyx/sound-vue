@@ -7,9 +7,9 @@
 
       <div class="nav-nav float-left">
         <div class="nav-nav-item">
-          <router-link class="nav-nav-item-link active" :to="{ name: 'songs' }">SoundRedux</router-link>
+          <router-link class="nav-nav-item-link active" :to="{ name: 'songs' }">SoundVue</router-link>
         </div>
-        
+
         <div class="nav-nav-item" v-if="authedUser">
           <router-link class="nav-nav-user-link" :to="{ name: 'stream' }" active-class="active">
             <span class="nav-nav-user-link-text">stream</span>
@@ -86,8 +86,6 @@
 </style>
 
 <script>
-  import { mapGetters } from 'vuex';
-
   import NavSearch from './nav/NavSearch.vue';
   import Popover from './Popover.vue';
   import AuthedPlaylist from './nav/AuthedPlaylist.vue';
@@ -119,7 +117,9 @@
       },
     },
     methods: {
-      // when use mapActions(['loginUser']), the event must be @click.prevent="loginUser()", otherwise the event obj will be the payload to dispatch function
+      // when use mapActions(['loginUser']),
+      // the event must be @click.prevent="loginUser()",
+      // otherwise the event obj will be the payload to dispatch function
       login() {
         this.$store.dispatch('loginUser');
       },

@@ -59,7 +59,8 @@
             .slice()
             .filter((comment) => {
               const commentTime = comment.timestamp / 1000;
-              return commentTime >= selfCurrentTime && commentTime < (selfCurrentTime + COMMENTS_REFRESH_RATE);
+              return commentTime >= selfCurrentTime
+                && commentTime < (selfCurrentTime + COMMENTS_REFRESH_RATE);
             })
             .sort((a, b) => a.timestamp - b.timestamp);
         }

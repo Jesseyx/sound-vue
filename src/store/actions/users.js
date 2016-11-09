@@ -17,7 +17,7 @@ export function fetchUserIfNeeded(context, userId) {
   const { userEntities } = context.getters;
 
   if (!(userId in userEntities) || !userEntities[userId].description) {
-    return fetchUser(context, userId);
+    fetchUser(context, userId);
   } else if (!('followings' in userEntities[userId])) {
     fetchUserData(context, userId, userEntities[userId].username);
   }
@@ -35,6 +35,7 @@ function fetchUser(context, userId) {
     .catch((err) => { throw err; });
 }
 
+/* eslint-disable no-unused-vars */
 function requestUser({ commit }, userId) {
   commit(types.REQUEST_USER, userId);
 }
@@ -85,6 +86,7 @@ function fetchUserFollowings(context, userId) {
     .catch((err) => { throw err; });
 }
 
+/* eslint-disable no-unused-vars */
 function receiveUserFollowings({ commit }, userId) {
   commit(types.RECEIVE_USER_FOLLOWINGS, userId);
 }
@@ -101,6 +103,7 @@ function fetchUserProfiles(context, userId) {
     .catch((err) => { throw err; });
 }
 
+/* eslint-disable no-unused-vars */
 function receiveUserProfiles({ commit }, userId) {
   commit(types.RECEIVE_USER_PROFILES, userId);
 }

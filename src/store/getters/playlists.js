@@ -1,3 +1,1 @@
-export const playlists = (state) => {
-  return state;
-};
+export const playlists = state => state;

@@ -66,9 +66,9 @@
     computed: {
       volumeStyle() {
         const { muted, volume } = this;
-        const width =  muted ? 0 : volume * 100;
+        const width = muted ? 0 : volume * 100;
         return {
-          width: `${width}%`
+          width: `${width}%`,
         };
       },
     },

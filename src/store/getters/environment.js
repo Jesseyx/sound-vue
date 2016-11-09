@@ -1,11 +1,5 @@
-export const isMobile = (state) => {
-  return state.isMobile;
-};
+export const isMobile = state => state.isMobile;
 
-export const eHeight = (state) => {
-  return state.height;
-};
+export const eHeight = state => state.height;
 
-export const eWidth = (state) => {
-  return state.width;
-};
+export const eWidth = state => state.width;

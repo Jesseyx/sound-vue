@@ -1,11 +1,5 @@
-export const playlistEntities = (state) => {
-  return state.playlists;
-};
+export const playlistEntities = state => state.playlists;
 
-export const songEntities = (state) => {
-  return state.songs;
-};
+export const songEntities = state => state.songs;
 
-export const userEntities = (state) => {
-  return state.users;
-};
+export const userEntities = state => state.users;

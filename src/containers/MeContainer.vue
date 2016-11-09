@@ -28,7 +28,7 @@
     computed: {
       ...mapGetters(['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlistEntities', 'playlists', 'songEntities', 'userEntities']),
       playlistName() {
-        const { playlistEntities } =  this;
+        const { playlistEntities } = this;
         const { name, params } = this.$route;
 
         switch (name) {

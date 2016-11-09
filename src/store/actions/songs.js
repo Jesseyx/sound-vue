@@ -37,6 +37,7 @@ function fetchSong(context, songId) {
     .catch((err) => { throw err; });
 }
 
+/* eslint-disable no-unused-vars */
 function requestSong({ commit }, songId) {
   commit(types.REQUEST_SONG, songId);
 }
@@ -51,6 +52,7 @@ function receiveSongPre(context, songId, entities) {
   fetchSongData(context, songId, userId, songTitle);
 }
 
+/* eslint-disable no-unused-vars */
 function receiveSong({ commit }, songId) {
   commit(types.RECEIVE_SONG, songId);
 }
@@ -76,7 +78,7 @@ function fetchRelatedSongs(context, userId, songTitle) {
 function fetchSongComments(context, songId) {
   return fetch(constructSongCommentsUrl(songId))
     .then(response => response.json())
-    .then(json => {
+    .then((json) => {
       const entities = { songs: { [songId]: { comments: json } } };
       receiveEntities(context, entities);
       // receiveSongComments(context, songId);
@@ -84,6 +86,7 @@ function fetchSongComments(context, songId) {
     .catch((err) => { throw err; });
 }
 
+/* eslint-disable no-unused-vars */
 function receiveSongComments({ commit }, songId) {
   commit(types.RECEIVE_SONG_COMMENTS, songId);
 }

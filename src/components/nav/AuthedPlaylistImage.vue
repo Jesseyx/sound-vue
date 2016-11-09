@@ -15,7 +15,7 @@
     computed: {
       src() {
         return getImageUrl(this.song.artwork_url);
-      }
+      },
     },
     props: ['song'],
   };

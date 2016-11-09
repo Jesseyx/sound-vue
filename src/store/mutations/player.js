@@ -1,11 +1,11 @@
 import * as types from '../../constants/mutation-types';
 
 export default {
-  [types.CHANGE_CURRENT_TIME] (state, time) {
+  [types.CHANGE_CURRENT_TIME](state, time) {
     state.currentTime = time;
   },
 
-  [types.CHANGE_SELECTED_PLAYLISTS] (state, playlist) {
+  [types.CHANGE_SELECTED_PLAYLISTS](state, playlist) {
     const { selectedPlaylists } = state;
 
     const index = selectedPlaylists.indexOf(playlist);
@@ -17,11 +17,11 @@ export default {
     selectedPlaylists.push(playlist);
   },
 
-  [types.CHANGE_PLAYING_SONG] (state, songIndex) {
+  [types.CHANGE_PLAYING_SONG](state, songIndex) {
     state.currentSongIndex = songIndex;
   },
 
-  [types.TOGGLE_IS_PLAYING] (state, isPlaying) {
+  [types.TOGGLE_IS_PLAYING](state, isPlaying) {
     state.isPlaying = isPlaying;
   },
 };

@@ -4,10 +4,10 @@ var app = express();
 var port = 8081;
 
 app.use(require('express-bunyan-logger')({
-  name: 'soundRedux',
+  name: 'sound-vue',
   format: function (obj) {
-    console.log('[soundredux] ' + obj.method + ' ' + obj.url);
-    console.log('[soundredux] Completed ' + obj['status-code'] + ' in ' + obj['response-time'] + 'ms');
+    console.log('[sound-vue] ' + obj.method + ' ' + obj.url);
+    console.log('[sound-vue] Completed ' + obj['status-code'] + ' in ' + obj['response-time'] + 'ms');
   },
   level: 'error',
   parseUA: false,
@@ -26,5 +26,5 @@ app.get('/api/callback', function (req, res) {
 });
 
 app.listen(port, function () {
-  console.log('[soundredux] listening on :' + port);
+  console.log('[sound-vue] listening on :' + port);
 });

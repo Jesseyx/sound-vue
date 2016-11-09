@@ -83,20 +83,23 @@
     },
     methods: {
       changeShownPlaylist(key) {
-        let { currentIndex: index, selectedPlaylists } = this;
+        let { currentIndex: index } = this;
+        const { selectedPlaylists } = this;
+
         if (key === 'prev') {
-          index = index - 1;
+          index -= 1;
         } else if (key === 'next') {
-          index = index + 1;
+          index += 1;
         }
 
-        if (index < 0 ||  index >= selectedPlaylists.length) {
+        if (index < 0 || index >= selectedPlaylists.length) {
           return;
         }
 
         this.shownPlaylistIndex = index;
       },
-      playSong(index) {console.log(index);
+      playSong(index) {
+        console.log(index);
         const { shownPlaylist } = this;
         this.$store.dispatch('playSong', {
           playlist: shownPlaylist,

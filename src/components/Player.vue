@@ -93,9 +93,6 @@
       streamUrl() {
         return formatStreamUrl(this.song.stream_url);
       },
-      artworkUrl() {
-        return getImageUrl(this.song.artwork_url);
-      },
     },
     methods: {
       handleEnded() {
@@ -105,7 +102,7 @@
           this.changeSong('next');
         }
       },
-      handleLoadedMetadata(e) {
+      handleLoadedMetadata() {
         this.duration = Math.floor(this.$refs.audio.duration);
       },
       handleLoadStart() {
@@ -120,21 +117,21 @@
       },
       handleTimeUpdate(e) {
         if (this.isSeeking) {
-          return false;
+          return;
         }
 
         const audioElement = e.currentTarget;
         const currentTime = Math.floor(audioElement.currentTime);
 
         if (currentTime === this.currentTime) {
-          return false;
+          return;
         }
 
         this.$store.dispatch('changeCurrentTime', currentTime);
       },
       handleVolumeChange(e) {
         if (this.isSeeking) {
-          return false;
+          return;
         }
 
         const volume = e.currentTarget.volume;
@@ -195,7 +192,7 @@
 
         this.$store.dispatch('changeCurrentTime', Math.floor(percent * this.duration));
       },
-      handleSeekMouseUp(e) {
+      handleSeekMouseUp() {
         if (!this.isSeeking) {
           return;
         }
@@ -280,7 +277,7 @@
         }
       },
     },
-    props: ['currentTime', 'isPlaying', 'playingSongId', 'playlists', 'song', 'user', 'currentSongIndex',  'selectedPlaylists', 'songEntities'],
+    props: ['currentTime', 'isPlaying', 'playingSongId', 'playlists', 'song', 'user', 'currentSongIndex', 'selectedPlaylists', 'songEntities'],
     mounted() {
       document.addEventListener('keydown', this.handleKeyDown, false);
 

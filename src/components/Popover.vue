@@ -20,8 +20,7 @@
         this.isOpen = !this.isOpen;
       },
       onOutsideClick(e) {
-        // must return false or a value, otherwise it still continue
-        if (!this.isOpen) return false;
+        if (!this.isOpen) return;
 
         e.stopPropagation();
         const localNode = this.$refs.node;
@@ -29,7 +28,7 @@
 
         while (source.parentNode) {
           if (source === localNode) {
-            return false;
+            return;
           }
           source = source.parentNode;
         }
