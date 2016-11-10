@@ -1,6 +1,6 @@
 # sound-vue
 
-A simple Soundcloud client build with [vue.js](https://github.com/vuejs/vue), [vue-router](https://github.com/vuejs/vue-router) and [vuex](https://github.com/vuejs/vuex). Creativity and UI based on [sound-redux](https://github.com/andrewngu/sound-redux).
+A simple [Soundcloud](http://soundcloud.com/) client build with [vue.js](https://github.com/vuejs/vue), [vue-router](https://github.com/vuejs/vue-router) and [vuex](https://github.com/vuejs/vuex). Creativity and UI based on [sound-redux](https://github.com/andrewngu/sound-redux).
 
 ## Build Setup
 
