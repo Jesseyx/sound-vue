@@ -1,5 +1,5 @@
+/* eslint-disable func-names, no-unused-vars */
 // Refer to this example: https://github.com/ElemeFE/vue-infinite-scroll
-
 const ctx = '@@stickyScroll';
 
 const throttle = function (fn, delay) {
@@ -45,10 +45,8 @@ const getScrollTop = function (element) {
   return element.scrollTop;
 };
 
-/* eslint-disable no-unused-vars */
 const getComputedStyle = document.defaultView.getComputedStyle;
 
-/* eslint-disable no-unused-vars */
 const getScrollEventTarget = function (element) {
   // let currentNode = element;
   // // bugfix, see http://w3help.org/zh-cn/causes/SD9013 and http://stackoverflow.com/questions/17016740/onscroll-function-is-not-working-for-chrome
@@ -99,7 +97,7 @@ const doCheck = function () {
 };
 
 const doBind = function () {
-  if (this.binded) return; // eslint-disable-line
+  if (this.binded) return;
   this.binded = true;
 
   const directive = this;

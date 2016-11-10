@@ -1,2 +1,3 @@
-webpack.config.js
 /server/authorizationServer.js
+build/*.js
+config/*.js

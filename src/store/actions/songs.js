@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { normalize, arrayOf } from 'normalizr';
 import { constructSongUrl, constructUserSongsUrl, constructSongCommentsUrl } from '../../utils/SongUtils';
 import * as types from '../../constants/mutation-types';
@@ -37,7 +38,6 @@ function fetchSong(context, songId) {
     .catch((err) => { throw err; });
 }
 
-/* eslint-disable no-unused-vars */
 function requestSong({ commit }, songId) {
   commit(types.REQUEST_SONG, songId);
 }
@@ -52,7 +52,6 @@ function receiveSongPre(context, songId, entities) {
   fetchSongData(context, songId, userId, songTitle);
 }
 
-/* eslint-disable no-unused-vars */
 function receiveSong({ commit }, songId) {
   commit(types.RECEIVE_SONG, songId);
 }
@@ -86,7 +85,6 @@ function fetchSongComments(context, songId) {
     .catch((err) => { throw err; });
 }
 
-/* eslint-disable no-unused-vars */
 function receiveSongComments({ commit }, songId) {
   commit(types.RECEIVE_SONG_COMMENTS, songId);
 }

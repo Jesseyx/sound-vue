@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { normalize, arrayOf } from 'normalizr';
 import merge from 'lodash/merge';
 
@@ -35,7 +36,6 @@ function fetchUser(context, userId) {
     .catch((err) => { throw err; });
 }
 
-/* eslint-disable no-unused-vars */
 function requestUser({ commit }, userId) {
   commit(types.REQUEST_USER, userId);
 }
@@ -86,7 +86,6 @@ function fetchUserFollowings(context, userId) {
     .catch((err) => { throw err; });
 }
 
-/* eslint-disable no-unused-vars */
 function receiveUserFollowings({ commit }, userId) {
   commit(types.RECEIVE_USER_FOLLOWINGS, userId);
 }
@@ -103,7 +102,6 @@ function fetchUserProfiles(context, userId) {
     .catch((err) => { throw err; });
 }
 
-/* eslint-disable no-unused-vars */
 function receiveUserProfiles({ commit }, userId) {
   commit(types.RECEIVE_USER_PROFILES, userId);
 }
