@@ -1,5 +1,5 @@
 <template>
-  <me
+  <Me
     :authedLikes="authedLikes"
     :authedUser="authedUser"
     :eHeight="eHeight"
@@ -9,7 +9,7 @@
     :songEntities="songEntities"
     :userEntities="userEntities"
   >
-  </me>
+  </Me>
 </template>
 
 <style></style>

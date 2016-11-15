@@ -51,6 +51,20 @@
         this.$store.dispatch('toggleLike', this.songId);
       },
     },
-    props: ['authedUser', 'authedLikes', 'count', 'songId'],
+    props: {
+      authedUser: Object,
+      authedLikes: {
+        type: Object,
+        required: true,
+      },
+      count: {
+        type: Number,
+        required: true,
+      },
+      songId: {
+        type: Number,
+        required: true,
+      },
+    },
   };
 </script>

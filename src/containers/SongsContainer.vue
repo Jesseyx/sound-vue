@@ -1,5 +1,5 @@
 <template>
-  <songs
+  <Songs
     :authedLikes="authedLikes"
     :authedUser="authedUser"
     :eHeight="eHeight"
@@ -10,7 +10,7 @@
     :time="info.time"
     :userEntities="userEntities"
   >
-  </songs>
+  </Songs>
 </template>
 
 <style></style>

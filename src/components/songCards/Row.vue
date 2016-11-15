@@ -1,7 +1,7 @@
 <template>
   <div class="songs-row grid">
     <div class="col-1-5 clearfix" v-for="(id, index) in list" :key="`${(baseIndex + index)}-${id}`">
-      <card
+      <Card
         :authedLikes="authedLikes"
         :authedUser="authedUser"
         :isActive="id === playingSongId"
@@ -11,7 +11,7 @@
         :playlist="playlist"
         :user="userEntities[songEntities[id].user_id]"
       >
-      </card>
+      </Card>
     </div>
 
     <div class="col-1-5" v-for="id in paddingNum" :key="`song-placeholder-${(baseIndex + id)}`"></div>
@@ -36,6 +36,41 @@
         return (start + (chunk * index));
       },
     },
-    props: ['authedLikes', 'authedUser', 'start', 'chunk', 'index', 'list', 'playingSongId', 'playlist', 'songEntities', 'userEntities'],
+    props: {
+      authedLikes: {
+        type: Object,
+        required: true,
+      },
+      authedUser: Object,
+      start: {
+        type: Number,
+        required: true,
+      },
+      chunk: {
+        type: Number,
+        required: true,
+      },
+      index: {
+        type: Number,
+        required: true,
+      },
+      list: {
+        type: Array,
+        required: true,
+      },
+      playingSongId: Number,
+      playlist: {
+        type: String,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
+      },
+      userEntities: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>

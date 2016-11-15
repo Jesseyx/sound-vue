@@ -35,6 +35,19 @@
         this.changeSong('next');
       },
     },
-    props: ['isPlaying', 'changeSong', 'togglePlay'],
+    props: {
+      isPlaying: {
+        type: Boolean,
+        required: true,
+      },
+      changeSong: {
+        type: Function,
+        required: true,
+      },
+      togglePlay: {
+        type: Function,
+        required: true,
+      },
+    },
   };
 </script>

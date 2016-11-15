@@ -27,7 +27,7 @@
     computed: {
       ...mapGetters(['authedUser', 'authedLikes', 'currentTime', 'eHeight', 'playingSongId', 'playlists', 'songEntities', 'userEntities']),
       songId() {
-        return this.$route.params.id;
+        return parseInt(this.$route.params.id, 10);
       },
     },
   };

@@ -17,6 +17,11 @@
         return getImageUrl(this.song.artwork_url);
       },
     },
-    props: ['song'],
+    props: {
+      song: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>

@@ -47,6 +47,12 @@
         return this.playlist.split(' - ')[0];
       },
     },
-    props: ['playlist', 'time'],
+    props: {
+      playlist: {
+        type: String,
+        required: true,
+      },
+      time: Number,
+    },
   };
 </script>

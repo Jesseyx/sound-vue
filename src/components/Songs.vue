@@ -1,13 +1,13 @@
 <template>
   <StickyWrapper class="songs">
-    <toolbar
+    <Toolbar
       :playlist="playlist"
       :time="time"
     >
-    </toolbar>
+    </Toolbar>
 
     <div class="container">
-      <song-cards
+      <SongCards
         :authedLikes="authedLikes"
         :authedUser="authedUser"
         :eHeight="eHeight"
@@ -17,7 +17,7 @@
         :songEntities="songEntities"
         :userEntities="userEntities"
       >
-      </song-cards>
+      </SongCards>
     </div>
   </StickyWrapper>
 </template>
@@ -49,6 +49,31 @@
         this.$store.dispatch('fetchSongsIfNeeded', playlist);
       }
     },
-    props: ['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlist', 'playlistData', 'songEntities', 'time', 'userEntities'],
+    props: {
+      authedLikes: {
+        type: Object,
+        required: true,
+      },
+      authedUser: Object,
+      eHeight: Number,
+      playingSongId: Number,
+      playlist: {
+        type: String,
+        required: true,
+      },
+      playlistData: {
+        type: Object,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
+      },
+      time: Number,
+      userEntities: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>

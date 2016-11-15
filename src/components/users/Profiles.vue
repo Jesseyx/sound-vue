@@ -33,6 +33,11 @@
         return addCommas(this.user.followers_count);
       },
     },
-    props: ['user'],
+    props: {
+      user: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>

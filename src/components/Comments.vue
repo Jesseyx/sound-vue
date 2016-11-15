@@ -92,6 +92,23 @@
         this.timedComments = !this.timedComments;
       },
     },
-    props: ['comments', 'currentTime', 'eHeight', 'isActive'],
+    props: {
+      comments: {
+        type: Array,
+        required: true,
+      },
+      currentTime: {
+        type: Number,
+        required: true,
+      },
+      eHeight: {
+        type: Number,
+        required: true,
+      },
+      isActive: {
+        type: Boolean,
+        required: true,
+      },
+    },
   };
 </script>

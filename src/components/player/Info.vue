@@ -36,6 +36,15 @@
         return formatSongTitle(this.song.title);
       },
     },
-    props: ['song', 'user'],
+    props: {
+      song: {
+        type: Object,
+        required: true,
+      },
+      user: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>

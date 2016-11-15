@@ -75,6 +75,27 @@
         this.seekPercent = seekPercent;
       },
     },
-    props: ['currentTime', 'duration', 'isActive', 'waveformUrl', 'playSong'],
+    props: {
+      currentTime: {
+        type: Number,
+        required: true,
+      },
+      duration: {
+        type: Number,
+        required: true,
+      },
+      isActive: {
+        type: Boolean,
+        required: true,
+      },
+      waveformUrl: {
+        type: String,
+        required: true,
+      },
+      playSong: {
+        type: Function,
+        required: true,
+      },
+    },
   };
 </script>

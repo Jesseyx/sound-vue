@@ -18,7 +18,7 @@
               <div class="user-username">
                 {{ user.username }}
               </div>
-              
+
               <div class="user-location">
                 <i class="icon ion-location"></i>
                 {{ location }}
@@ -112,7 +112,6 @@
         });
       },
     },
-    props: ['authedLikes', 'authedUser', 'authedFollowings', 'currentTime', 'eHeight', 'playingSongId', 'playlists', 'songEntities', 'userEntities', 'userId'],
     watch: {
       userId(newId) {
         this.$store.dispatch('fetchUserIfNeeded', newId);
@@ -121,6 +120,39 @@
     beforeMount() {
       const { userId } = this;
       this.$store.dispatch('fetchUserIfNeeded', userId);
+    },
+    props: {
+      authedLikes: {
+        type: Object,
+        required: true,
+      },
+      authedUser: Object,
+      authedFollowings: {
+        type: Object,
+        required: true,
+      },
+      currentTime: {
+        type: Number,
+        required: true,
+      },
+      eHeight: Number,
+      playingSongId: Number,
+      playlists: {
+        type: Object,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
+      },
+      userEntities: {
+        type: Object,
+        required: true,
+      },
+      userId: {
+        type: Number,
+        required: true,
+      },
     },
   };
 </script>

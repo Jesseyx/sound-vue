@@ -29,24 +29,24 @@
             <i class="icon ion-chevron-up"></i>
           </div>
           <div class="nav-playlists-popover popover-content" slot="bomb">
-            <authed-playlist
+            <AuthedPlaylist
               v-for="playlistId in authedPlaylists"
               :playlist="playlistEntities[playlistId]"
               :playlistId="playlistId"
               :songEntities="songEntities"
               :key="playlistId"
             >
-            </authed-playlist>
+            </AuthedPlaylist>
           </div>
         </popover>
       </div>
 
       <div class="nav-nav float-right">
         <div class="nav-nav-item">
-          <nav-search></nav-search>
+          <NavSearch></NavSearch>
         </div>
         <div class="nav-nav-item">
-          <popover class="nav-user" v-if="authedUser">
+          <Popover class="nav-user" v-if="authedUser">
             <div class="nav-user-link" slot="content">
               <img class="nav-authed-image" :src="avatar" alt="User avatar" />
               <i class="icon ion-chevron-down"></i>
@@ -59,9 +59,9 @@
                 </li>
               </ul>
             </div>
-          </popover>
+          </Popover>
 
-          <popover class="nav-user" v-if="!authedUser">
+          <Popover class="nav-user" v-if="!authedUser">
             <div class="nav-user-link" slot="content">
               <i class="icon ion-person"></i>
               <i class="icon ion-chevron-down"></i>
@@ -74,7 +74,7 @@
                 </li>
               </ul>
             </div>
-          </popover>
+          </Popover>
         </div>
       </div>
     </div>
@@ -127,6 +127,20 @@
         this.$store.dispatch('logoutUser');
       },
     },
-    props: ['authedPlaylists', 'authedUser', 'playlistEntities', 'songEntities'],
+    props: {
+      authedPlaylists: {
+        type: Array,
+        required: true,
+      },
+      authedUser: Object,
+      playlistEntities: {
+        type: Object,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>

@@ -16,25 +16,25 @@
     <div class="container">
       <div class="player-main">
 
-        <info :song="song" :user="user" ></info>
+        <Info :song="song" :user="user" ></Info>
 
-        <left-control
+        <LeftControl
           :isPlaying="isPlaying"
           :changeSong="changeSong"
           :togglePlay="togglePlay"
         >
-        </left-control>
+        </LeftControl>
 
-        <seek
+        <Seek
           :currentTime="currentTime"
           :duration="duration"
           :seek="seek"
           :handleSeekMouseDown="handleSeekMouseDown"
           ref="seekComponent"
         >
-        </seek>
+        </Seek>
 
-        <right-control
+        <RightControl
           :repeat="repeat"
           :toggleRepeat="toggleRepeat"
           :shuffle="shuffle"
@@ -50,7 +50,7 @@
           :songEntities="songEntities"
           ref="rightControlComponent"
         >
-        </right-control>
+        </RightControl>
 
       </div>
     </div>
@@ -277,7 +277,6 @@
         }
       },
     },
-    props: ['currentTime', 'isPlaying', 'playingSongId', 'playlists', 'song', 'user', 'currentSongIndex', 'selectedPlaylists', 'songEntities'],
     mounted() {
       document.addEventListener('keydown', this.handleKeyDown, false);
 
@@ -296,6 +295,44 @@
             this.$refs.audio.play();
           });
         }
+      },
+    },
+    props: {
+      currentTime: {
+        type: Number,
+        required: true,
+      },
+      isPlaying: {
+        type: Boolean,
+        required: true,
+      },
+      playingSongId: {
+        type: Number,
+        required: true,
+      },
+      playlists: {
+        type: Object,
+        required: true,
+      },
+      song: {
+        type: Object,
+        required: true,
+      },
+      user: {
+        type: Object,
+        required: true,
+      },
+      currentSongIndex: {
+        type: Number,
+        required: true,
+      },
+      selectedPlaylists: {
+        type: Array,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
       },
     },
   };

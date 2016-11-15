@@ -9,17 +9,17 @@
       <i class="icon ion-shuffle"></i>
     </div>
 
-    <popover class="player-button top-right">
+    <Popover class="player-button top-right">
       <i class="icon ion-android-list" slot="content"></i>
-      <playlist
+      <Playlist
         :currentSongIndex="currentSongIndex"
         :selectedPlaylists="selectedPlaylists"
         :playlists="playlists"
         :songEntities="songEntities"
         slot="bomb"
       >
-      </playlist>
-    </popover>
+      </Playlist>
+    </Popover>
 
     <div class="player-button player-volume-button" @click="toggleMute">
       <i class="icon ion-android-volume-off" v-if="muted"></i>
@@ -58,7 +58,6 @@
   import Playlist from '../Playlist.vue';
 
   export default {
-    props: ['repeat', 'toggleRepeat', 'shuffle', 'toggleShuffle', 'muted', 'toggleMute', 'volume', 'changeVolume', 'handleVolumeMouseDown', 'currentSongIndex', 'selectedPlaylists', 'playlists', 'songEntities'],
     components: {
       Popover,
       Playlist,
@@ -70,6 +69,60 @@
         return {
           width: `${width}%`,
         };
+      },
+    },
+    props: {
+      repeat: {
+        type: Boolean,
+        required: true,
+      },
+      toggleRepeat: {
+        type: Function,
+        required: true,
+      },
+      shuffle: {
+        type: Boolean,
+        required: true,
+      },
+      toggleShuffle: {
+        type: Function,
+        required: true,
+      },
+      muted: {
+        type: Boolean,
+        required: true,
+      },
+      toggleMute: {
+        type: Function,
+        required: true,
+      },
+      volume: {
+        type: Number,
+        required: true,
+      },
+      changeVolume: {
+        type: Function,
+        required: true,
+      },
+      handleVolumeMouseDown: {
+        type: Function,
+        required: true,
+      },
+      currentSongIndex: {
+        type: Number,
+        required: true,
+      },
+      selectedPlaylists: {
+        type: Array,
+        required: true,
+      },
+      playlists: {
+        type: Object,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
       },
     },
   };

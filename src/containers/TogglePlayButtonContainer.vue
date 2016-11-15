@@ -1,5 +1,5 @@
 <template>
-  <toggle-play-button :isPlaying="isPlaying"></toggle-play-button>
+  <TogglePlayButton :isPlaying="isPlaying"></TogglePlayButton>
 </template>
 
 <style></style>

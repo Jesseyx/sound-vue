@@ -22,7 +22,6 @@
   import { formatSeconds } from '../../utils/FormatUtils';
 
   export default {
-    props: ['currentTime', 'duration', 'seek', 'handleSeekMouseDown'],
     computed: {
       formatCurrentTime() {
         return formatSeconds(this.currentTime);
@@ -37,6 +36,24 @@
         return {
           width: `${width}%`,
         };
+      },
+    },
+    props: {
+      currentTime: {
+        type: Number,
+        required: true,
+      },
+      duration: {
+        type: Number,
+        required: true,
+      },
+      seek: {
+        type: Function,
+        required: true,
+      },
+      handleSeekMouseDown: {
+        type: Function,
+        required: true,
       },
     },
   };

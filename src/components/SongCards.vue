@@ -2,7 +2,7 @@
   <div class="content">
     <div class="padder" :style="{ height: `${paddingTop}px` }"></div>
 
-    <s-row
+    <sRow
       v-for="(item, index) in normalized"
       :authedLikes="authedLikes"
       :authedUser="authedUser"
@@ -16,11 +16,11 @@
       :userEntities="userEntities"
       :key="`songs-row-${(start/chunk) + index}`"
     >
-    </s-row>
+    </sRow>
 
     <div class="padder" :style="{ height: `${paddingBottom}px` }"></div>
 
-    <spinner v-if="isFetching"></spinner>
+    <Spinner v-if="isFetching"></Spinner>
   </div>
 </template>
 
@@ -142,6 +142,30 @@
     beforeDestroy() {
       window.removeEventListener('scroll', this.onScroll, false);
     },
-    props: ['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlist', 'playlistData', 'songEntities', 'userEntities'],
+    props: {
+      authedLikes: {
+        type: Object,
+        required: true,
+      },
+      authedUser: Object,
+      eHeight: Number,
+      playingSongId: Number,
+      playlist: {
+        type: String,
+        required: true,
+      },
+      playlistData: {
+        type: Object,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
+      },
+      userEntities: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>

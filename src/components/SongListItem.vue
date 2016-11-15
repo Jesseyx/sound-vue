@@ -100,6 +100,40 @@
     filters: {
       addCommas,
     },
-    props: ['authedLikes', 'authedUser', 'currentTime', 'isActive', 'songId', 'songEntities', 'userEntities', 'playSong', 'index'],
+    props: {
+      authedLikes: {
+        type: Object,
+        required: true,
+      },
+      authedUser: Object,
+      currentTime: {
+        type: Number,
+        required: true,
+      },
+      isActive: {
+        type: Boolean,
+        required: true,
+      },
+      songId: {
+        type: Number,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
+      },
+      userEntities: {
+        type: Object,
+        required: true,
+      },
+      playSong: {
+        type: Function,
+        required: true,
+      },
+      index: {
+        type: Number,
+        required: true,
+      },
+    },
   };
 </script>

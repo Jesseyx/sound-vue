@@ -18,6 +18,11 @@
         return getSocialIcon(this.profile.service);
       },
     },
-    props: ['profile'],
+    props: {
+      profile: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>

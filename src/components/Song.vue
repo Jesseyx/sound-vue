@@ -158,7 +158,6 @@
     filters: {
       addCommas,
     },
-    props: ['authedUser', 'authedLikes', 'currentTime', 'eHeight', 'playingSongId', 'playlists', 'songId', 'songEntities', 'userEntities'],
     watch: {
       songId(newId) {
         this.$store.dispatch('fetchSongIfNeeded', newId);
@@ -167,6 +166,35 @@
     beforeMount() {
       const { songId } = this;
       this.$store.dispatch('fetchSongIfNeeded', songId);
+    },
+    props: {
+      authedUser: Object,
+      authedLikes: {
+        type: Object,
+        required: true,
+      },
+      currentTime: {
+        type: Number,
+        required: true,
+      },
+      eHeight: Number,
+      playingSongId: Number,
+      playlists: {
+        type: Object,
+        required: true,
+      },
+      songId: {
+        type: Number,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
+      },
+      userEntities: {
+        type: Object,
+        required: true,
+      },
     },
   };
 </script>

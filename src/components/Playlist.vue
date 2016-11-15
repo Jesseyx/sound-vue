@@ -15,14 +15,14 @@
     </div>
 
     <div class="playlist-body">
-      <songs
+      <Songs
         :songsId="currentItems"
         :songEntities="songEntities"
         :currentSongIndex="currentSongIndex"
         :playerIsShownCurrentPlaylist="playerIsShownCurrentPlaylist"
         :playSong="playSong"
       >
-      </songs>
+      </Songs>
     </div>
 
     <div class="playlist-footer">
@@ -109,6 +109,23 @@
         this.shownPlaylistIndex = null;
       },
     },
-    props: ['currentSongIndex', 'selectedPlaylists', 'playlists', 'songEntities'],
+    props: {
+      currentSongIndex: {
+        type: Number,
+        required: true,
+      },
+      selectedPlaylists: {
+        type: Array,
+        required: true,
+      },
+      playlists: {
+        type: Object,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>

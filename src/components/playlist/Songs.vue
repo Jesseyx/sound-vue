@@ -1,6 +1,6 @@
 <template>
   <ul class="playlist-songs">
-    <song-item
+    <SongItem
       v-for="(songId, i) in songsId"
       :song="songEntities[songId]"
       :isActiveSong="playerIsShownCurrentPlaylist && currentSongIndex === i"
@@ -8,7 +8,7 @@
       :index="i"
       :key="`${songId}-${i}`"
     >
-    </song-item>
+    </SongItem>
   </ul>
 </template>
 
@@ -21,6 +21,27 @@
     components: {
       SongItem,
     },
-    props: ['songsId', 'songEntities', 'currentSongIndex', 'playerIsShownCurrentPlaylist', 'playSong'],
+    props: {
+      songsId: {
+        type: Array,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
+      },
+      currentSongIndex: {
+        type: Number,
+        required: true,
+      },
+      playerIsShownCurrentPlaylist: {
+        type: Boolean,
+        required: true,
+      },
+      playSong: {
+        type: Function,
+        required: true,
+      },
+    },
   };
 </script>

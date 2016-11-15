@@ -18,6 +18,23 @@
         return getImageUrl(this.song.artwork_url);
       },
     },
-    props: ['song', 'isActiveSong', 'playSong', 'index'],
+    props: {
+      song: {
+        type: Object,
+        required: true,
+      },
+      isActiveSong: {
+        type: Boolean,
+        required: true,
+      },
+      playSong: {
+        type: Function,
+        required: true,
+      },
+      index: {
+        type: Number,
+        required: true,
+      },
+    },
   };
 </script>

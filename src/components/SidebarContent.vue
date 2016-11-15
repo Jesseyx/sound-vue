@@ -21,6 +21,11 @@
         console.log('handleMouseLeave');
       },
     },
-    props: ['height'],
+    props: {
+      height: {
+        type: Number,
+        required: true,
+      },
+    },
   };
 </script>

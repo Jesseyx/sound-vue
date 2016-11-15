@@ -36,6 +36,15 @@
         return formatSeconds(Math.floor(this.comment.timestamp / 1000));
       },
     },
-    props: ['comment', 'index'],
+    props: {
+      comment: {
+        type: Object,
+        required: true,
+      },
+      index: {
+        type: Number,
+        required: true,
+      },
+    },
   };
 </script>

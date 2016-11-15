@@ -34,6 +34,37 @@
         return (relatedSongs.items && relatedSongs.items.slice(1)) || null;
       },
     },
-    props: ['authedLikes', 'authedUser', 'currentTime', 'playingSongId', 'playlist', 'playlists', 'songEntities', 'userEntities', 'playSong'],
+    props: {
+      authedLikes: {
+        type: Object,
+        required: true,
+      },
+      authedUser: Object,
+      currentTime: {
+        type: Number,
+        required: true,
+      },
+      playingSongId: Number,
+      playlist: {
+        type: String,
+        required: true,
+      },
+      playlists: {
+        type: Object,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
+      },
+      userEntities: {
+        type: Object,
+        required: true,
+      },
+      playSong: {
+        type: Function,
+        required: true,
+      },
+    },
   };
 </script>

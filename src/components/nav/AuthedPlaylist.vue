@@ -5,12 +5,12 @@
     </div>
 
     <div class="nav-playlist-images">
-      <authed-playlist-image
+      <AuthedPlaylistImage
         v-for="songId in songIds"
         :song="songEntities[songId]"
         :key="songId"
       >
-      </authed-playlist-image>
+      </AuthedPlaylistImage>
     </div>
   </router-link>
 </template>
@@ -34,6 +34,19 @@
         return this.playlist.tracks.slice(0, 10);
       },
     },
-    props: ['playlistId', 'playlist', 'songEntities'],
+    props: {
+      playlistId: {
+        type: Number,
+        required: true,
+      },
+      playlist: {
+        type: Object,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>

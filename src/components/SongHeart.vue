@@ -1,5 +1,5 @@
 <template>
-    <popover class="song-heart" :class="className" v-if="!authedUser">
+    <Popover class="song-heart" :class="className" v-if="!authedUser">
       <i class="icon ion-ios-heart" slot="content"></i>
       <div class="song-heart-popover popover-content" slot="bomb">
         <ul class="nav-user-popover-list">
@@ -10,7 +10,7 @@
           </li>
         </ul>
       </div>
-    </popover>
+    </Popover>
 
     <a class="song-heart" :class="[className, isLiked ? 'liked' : '']" href="#" v-else @click.prevent="toggleLike">
       <i class="icon ion-ios-heart"></i>
@@ -34,6 +34,17 @@
         this.$store.dispatch('toggleLike', this.songId);
       },
     },
-    props: ['authedUser', 'className', 'isLiked', 'songId'],
+    props: {
+      authedUser: Object,
+      className: String,
+      isLiked: {
+        type: Boolean,
+        required: true,
+      },
+      songId: {
+        type: Number,
+        required: true,
+      },
+    },
   };
 </script>

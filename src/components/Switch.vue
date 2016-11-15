@@ -8,6 +8,15 @@
 
 <script>
   export default {
-    props: ['isOn', 'toggleFunc'],
+    props: {
+      isOn: {
+        type: Boolean,
+        required: true,
+      },
+      toggleFunc: {
+        type: Function,
+        required: true,
+      },
+    },
   };
 </script>

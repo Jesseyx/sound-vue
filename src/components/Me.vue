@@ -1,7 +1,7 @@
 <template>
   <div class="me">
     <div class="container">
-      <song-cards
+      <SongCards
         :authedLikes="authedLikes"
         :authedUser="authedUser"
         :eHeight="eHeight"
@@ -11,7 +11,7 @@
         :songEntities="songEntities"
         :userEntities="userEntities"
       >
-      </song-cards>
+      </SongCards>
     </div>
   </div>
 </template>
@@ -25,6 +25,30 @@
     components: {
       SongCards,
     },
-    props: ['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlist', 'playlistData', 'songEntities', 'userEntities'],
+    props: {
+      authedLikes: {
+        type: Object,
+        required: true,
+      },
+      authedUser: Object,
+      eHeight: Number,
+      playingSongId: Number,
+      playlist: {
+        type: String,
+        required: true,
+      },
+      playlistData: {
+        type: Object,
+        required: true,
+      },
+      songEntities: {
+        type: Object,
+        required: true,
+      },
+      userEntities: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>

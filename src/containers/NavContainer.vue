@@ -1,11 +1,11 @@
 <template>
-  <c-nav
+  <cNav
     :authedPlaylists="authedPlaylists"
     :authedUser="authedUser"
     :playlistEntities="playlistEntities"
     :songEntities="songEntities"
   >
-  </c-nav>
+  </cNav>
 </template>
 
 <style lang="sass">

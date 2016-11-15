@@ -1,7 +1,7 @@
 <template>
   <div class="card song-card" :class="{ active: isActive }">
     <div class="song-card-image" :style="style">
-      <toggle-play-button-container v-if="isActive"></toggle-play-button-container>
+      <TogglePlayButtonContainer v-if="isActive"></TogglePlayButtonContainer>
       <div class="toggle-play-button" v-else @click="playSong">
         <i class="toggle-play-button-icon ion-ios-play"></i>
       </div>
@@ -26,13 +26,13 @@
           {{ user.username }}
         </router-link>
 
-        <song-heart
+        <SongHeart
           :authedUser="authedUser"
           :className="'song-card-heart'"
           :isLiked="isLiked"
           :songId="songId"
         >
-        </song-heart>
+        </SongHeart>
       </div>
     </div>
   </div>
@@ -81,6 +81,36 @@
         });
       },
     },
-    props: ['authedLikes', 'authedUser', 'isActive', 'playlist', 'song', 'songId', 'songIndex', 'user'],
+    props: {
+      authedLikes: {
+        type: Object,
+        required: true,
+      },
+      authedUser: Object,
+      isActive: {
+        type: Boolean,
+        required: true,
+      },
+      playlist: {
+        type: String,
+        required: true,
+      },
+      song: {
+        type: Object,
+        required: true,
+      },
+      songId: {
+        type: Number,
+        required: true,
+      },
+      songIndex: {
+        type: Number,
+        required: true,
+      },
+      user: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>

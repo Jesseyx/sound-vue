@@ -1,8 +1,8 @@
 <template>
   <div>
-    <nav-container></nav-container>
+    <NavContainer></NavContainer>
     <router-view></router-view>
-    <player-container></player-container>
+    <PlayerContainer></PlayerContainer>
   </div>
 </template>
 

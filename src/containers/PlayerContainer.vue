@@ -1,5 +1,5 @@
 <template>
-  <player
+  <Player
     v-if="playingSongId"
     :currentTime="currentTime"
     :isPlaying="isPlaying"
@@ -11,7 +11,7 @@
     :selectedPlaylists="selectedPlaylists"
     :songEntities="songEntities"
   >
-  </player>
+  </Player>
 </template>
 
 <style></style>

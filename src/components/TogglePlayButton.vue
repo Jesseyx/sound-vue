@@ -25,6 +25,11 @@
         }
       },
     },
-    props: ['isPlaying'],
+    props: {
+      isPlaying: {
+        type: Boolean,
+        required: true,
+      },
+    },
   };
 </script>

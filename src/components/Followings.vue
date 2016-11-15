@@ -40,6 +40,19 @@
         return user.followings.map(followingId => userEntities[followingId]);
       },
     },
-    props: ['eHeight', 'user', 'userEntities'],
+    props: {
+      eHeight: {
+        type: Number,
+        required: true,
+      },
+      user: {
+        type: Object,
+        required: true,
+      },
+      userEntities: {
+        type: Object,
+        required: true,
+      },
+    },
   };
 </script>
