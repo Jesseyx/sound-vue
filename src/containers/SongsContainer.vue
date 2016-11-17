@@ -1,5 +1,6 @@
 <template>
-  <Songs
+  <components
+    :is="currentView"
     :authedLikes="authedLikes"
     :authedUser="authedUser"
     :eHeight="eHeight"
@@ -10,7 +11,7 @@
     :time="info.time"
     :userEntities="userEntities"
   >
-  </Songs>
+  </components>
 </template>
 
 <style></style>
@@ -19,13 +20,20 @@
   import { mapGetters } from 'vuex';
 
   import Songs from '../components/Songs.vue';
+  import MobileSongs from '../components/MobileSongs.vue';
 
   export default {
+    data() {
+      return {
+        currentView: 'Songs',
+      };
+    },
     components: {
       Songs,
+      MobileSongs,
     },
     computed: {
-      ...mapGetters(['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlists', 'songEntities', 'userEntities']),
+      ...mapGetters(['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlists', 'songEntities', 'userEntities', 'isMobile']),
       info() {
         const { query } = this.$route;
 
@@ -44,6 +52,13 @@
         const { info, playlists } = this;
         const { playlist } = info;
         return playlist in playlists ? playlists[playlist] : {};
+      },
+    },
+    watch: {
+      isMobile(newIsMobile) {
+        if (newIsMobile) {
+          this.currentView = 'MobileSongs';
+        }
       },
     },
   };
