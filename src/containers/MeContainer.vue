@@ -1,5 +1,6 @@
 <template>
-  <Me
+  <component
+    :is="currentView"
     :authedLikes="authedLikes"
     :authedUser="authedUser"
     :eHeight="eHeight"
@@ -9,7 +10,7 @@
     :songEntities="songEntities"
     :userEntities="userEntities"
   >
-  </Me>
+  </component>
 </template>
 
 <style></style>
@@ -18,15 +19,25 @@
   import { mapGetters } from 'vuex';
 
   import Me from '../components/Me.vue';
+  import MobileMe from '../components/MobileMe.vue';
 
   import { AUTHED_PLAYLIST_SUFFIX } from '../constants/PlaylistConstants';
 
   export default {
+    data() {
+      const { isMobile } = this;
+      const currentView = isMobile ? 'MobileMe' : 'Me';
+
+      return {
+        currentView,
+      };
+    },
     components: {
       Me,
+      MobileMe,
     },
     computed: {
-      ...mapGetters(['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlistEntities', 'playlists', 'songEntities', 'userEntities']),
+      ...mapGetters(['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlistEntities', 'playlists', 'songEntities', 'userEntities', 'isMobile']),
       playlistName() {
         const { playlistEntities } = this;
         const { name, params } = this.$route;
@@ -52,6 +63,13 @@
       playlistData() {
         const { playlist, playlists } = this;
         return playlist in playlists ? playlists[playlist] : {};
+      },
+    },
+    watch: {
+      isMobile(newIsMobile) {
+        if (newIsMobile) {
+          this.currentView = 'MobileMe';
+        }
       },
     },
   };

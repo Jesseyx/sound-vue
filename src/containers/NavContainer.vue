@@ -21,7 +21,7 @@
   export default {
     data() {
       return {
-        currentView: cNav,
+        currentView: 'cNav',
       };
     },
     components: {

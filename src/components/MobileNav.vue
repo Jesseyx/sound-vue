@@ -16,12 +16,12 @@
     <MenuMotion :distance="4 * 50">
       <div class="mobile-nav-menu mobile-scrollable" v-if="isUserMenuOpen" @click="toggleUserMenuOpen">
         <router-link
-          v-for="name in userPlaylistNames"
+          v-for="detail in userPlaylistDetails"
           class="mobile-nav-tab"
-          :to="{ path: `/me/${name}` }"
-          :key="name"
+          :to="detail.to"
+          :key="detail.title"
         >
-          {{ name }}
+          {{ detail.title }}
         </router-link>
       </div>
     </MenuMotion>
@@ -87,15 +87,28 @@
         const { isGenreMenuOpen, playlist } = this;
         return isGenreMenuOpen ? GENRES.filter(genre => genre !== playlist) : [];
       },
-      userPlaylistNames() {
+      userPlaylistDetails() {
         const { authedPlaylists, playlistEntities } = this;
-        const playlistNames = [];
+        const playlistDetails = [];
 
         authedPlaylists.forEach((id) => {
-          playlistNames.push(`PLAYLIST: ${playlistEntities[id].title}`);
+          playlistDetails.push({
+            title: playlistEntities[id].title,
+            to: { name: 'playlists', params: { id } },
+          });
         });
 
-        return ['stream', 'likes', ...playlistNames];
+        return [
+          {
+            title: 'stream',
+            to: { name: 'stream' },
+          },
+          {
+            title: 'likes',
+            to: { name: 'likes' },
+          },
+          ...playlistDetails,
+        ];
       },
       avatarUrl() {
         return getImageUrl(this.authedUser.avatar_url);

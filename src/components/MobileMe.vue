@@ -18,20 +18,6 @@
     components: {
       MobileSongsList,
     },
-    watch: {
-      playlist(nextPlaylist) {
-        const { playlistData } = this;
-        if (!playlistData.items || playlistData.items.length === 0) {
-          this.$store.dispatch('fetchSongsIfNeeded', nextPlaylist);
-        }
-      },
-    },
-    beforeMount() {
-      const { playlist, playlistData } = this;
-      if (!playlistData.items || playlistData.items.length === 0) {
-        this.$store.dispatch('fetchSongsIfNeeded', playlist);
-      }
-    },
     props: {
       authedLikes: {
         type: Object,
@@ -52,7 +38,6 @@
         type: Object,
         required: true,
       },
-      time: Number,
       userEntities: {
         type: Object,
         required: true,
