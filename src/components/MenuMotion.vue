@@ -1,5 +1,6 @@
 <template>
   <transition
+    appear
     :css="false"
     @before-enter="beforeEnter"
     @enter="enter"
@@ -14,6 +15,7 @@
 <script>
   import Velocity from 'velocity-animate';
 
+  // source-code: const beforeEnterHook = isAppear ? (beforeAppear || beforeEnter) : beforeEnter
   export default {
     methods: {
       beforeEnter(el) {
