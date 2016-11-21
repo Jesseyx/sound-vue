@@ -20,8 +20,10 @@
 
   export default {
     data() {
+      const { isMobile } = this;
+      const currentView = isMobile ? 'MobileNav' : 'cNav';
       return {
-        currentView: 'cNav',
+        currentView,
       };
     },
     components: {
@@ -29,13 +31,17 @@
       MobileNav,
     },
     computed: {
-      ...mapGetters(['authedPlaylists', 'authedUser', 'playlistEntities', 'songEntities', 'isMobile']),
+      ...mapGetters(['authedPlaylists', 'authedUser', 'playlistEntities', 'songEntities']),
     },
     watch: {
       isMobile(newIsMobile) {
-        if (newIsMobile) {
-          this.currentView = 'MobileNav';
-        }
+        this.currentView = newIsMobile ? 'MobileNav' : 'cNav';
+      },
+    },
+    props: {
+      isMobile: {
+        type: Boolean,
+        required: true,
       },
     },
   };

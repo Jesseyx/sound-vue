@@ -27,7 +27,6 @@
     data() {
       const { isMobile } = this;
       const currentView = isMobile ? 'MobileMe' : 'Me';
-
       return {
         currentView,
       };
@@ -37,7 +36,7 @@
       MobileMe,
     },
     computed: {
-      ...mapGetters(['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlistEntities', 'playlists', 'songEntities', 'userEntities', 'isMobile']),
+      ...mapGetters(['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlistEntities', 'playlists', 'songEntities', 'userEntities']),
       playlistName() {
         const { playlistEntities } = this;
         const { name, params } = this.$route;
@@ -67,9 +66,13 @@
     },
     watch: {
       isMobile(newIsMobile) {
-        if (newIsMobile) {
-          this.currentView = 'MobileMe';
-        }
+        this.currentView = newIsMobile ? 'MobileMe' : 'Me';
+      },
+    },
+    props: {
+      isMobile: {
+        type: Boolean,
+        required: true,
       },
     },
   };

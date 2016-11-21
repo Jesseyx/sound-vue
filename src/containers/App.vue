@@ -1,8 +1,8 @@
 <template>
   <div :class="className" :style="styleObj">
-    <component :is="top"></component>
-    <router-view></router-view>
-    <component :is="bottom"></component>
+    <component :is="top" :isMobile="isMobile"></component>
+    <router-view :isMobile="isMobile"></router-view>
+    <component :is="bottom" :isMobile="isMobile"></component>
   </div>
 </template>
 

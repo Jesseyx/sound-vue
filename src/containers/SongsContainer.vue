@@ -24,8 +24,10 @@
 
   export default {
     data() {
+      const { isMobile } = this;
+      const currentView = isMobile ? 'MobileSongs' : 'Songs';
       return {
-        currentView: 'Songs',
+        currentView,
       };
     },
     components: {
@@ -33,7 +35,7 @@
       MobileSongs,
     },
     computed: {
-      ...mapGetters(['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlists', 'songEntities', 'userEntities', 'isMobile']),
+      ...mapGetters(['authedLikes', 'authedUser', 'eHeight', 'playingSongId', 'playlists', 'songEntities', 'userEntities']),
       info() {
         const { query } = this.$route;
 
@@ -56,9 +58,13 @@
     },
     watch: {
       isMobile(newIsMobile) {
-        if (newIsMobile) {
-          this.currentView = 'MobileSongs';
-        }
+        this.currentView = newIsMobile ? 'MobileSongs' : 'Songs';
+      },
+    },
+    props: {
+      isMobile: {
+        type: Boolean,
+        required: true,
       },
     },
   };

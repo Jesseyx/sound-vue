@@ -25,8 +25,10 @@
 
   export default {
     data() {
+      const { isMobile } = this;
+      const currentView = isMobile ? 'MobilePlayer' : 'Player';
       return {
-        currentView: 'Player',
+        currentView,
       };
     },
     components: {
@@ -34,7 +36,7 @@
       MobilePlayer,
     },
     computed: {
-      ...mapGetters(['currentTime', 'isPlaying', 'playingSongId', 'playlists', 'songEntities', 'userEntities', 'currentSongIndex', 'selectedPlaylists', 'isMobile']),
+      ...mapGetters(['currentTime', 'isPlaying', 'playingSongId', 'playlists', 'songEntities', 'userEntities', 'currentSongIndex', 'selectedPlaylists']),
       song() {
         const { songEntities, playingSongId } = this;
         return songEntities[playingSongId];
@@ -46,9 +48,13 @@
     },
     watch: {
       isMobile(newIsMobile) {
-        if (newIsMobile) {
-          this.currentView = 'MobilePlayer';
-        }
+        this.currentView = newIsMobile ? 'MobilePlayer' : 'Player';
+      },
+    },
+    props: {
+      isMobile: {
+        type: Boolean,
+        required: true,
       },
     },
   };
