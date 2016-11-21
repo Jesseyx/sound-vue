@@ -30,7 +30,8 @@
     },
     computed: {
       isFetching() {
-        return this.playlistData.isFetching;
+        const { playlistData } = this;
+        return 'isFetching' in playlistData ? playlistData.isFetching : true;
       },
       normalized() {
         const { playlistData } = this;
