@@ -9,7 +9,7 @@ var exec = function (cmd) {
 var versionRequirements = [
   {
     name: 'node',
-    currentVersion: semver(process.version),
+    currentVersion: semver.clean(process.version),
     versionRequirement: packageConfig.engines.node,
   },
   {

@@ -18,12 +18,12 @@ var webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunchunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
+    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
   },
   vue: {
     loaders: utils.cssLoaders({
       sourceMap: config.build.productionSourceMap,
-      extract: true
+      extract: true,
     }),
   },
   plugins: [

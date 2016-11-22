@@ -19,7 +19,7 @@ npm run dev
 npm run build
 ```
 
-### Local authentication server setup
+## Local authentication server setup
 
 to see user authentication in action in your local environment, install and run this server.
 
@@ -29,3 +29,7 @@ npm run auth
 ```
 
 Feedback, issues, etc. are more than welcome!
+
+## License
+
+MIT
