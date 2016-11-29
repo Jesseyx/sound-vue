@@ -3,11 +3,11 @@
     "browser": true
   },
   "root": true,
+  "extends": "airbnb-base",
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
   },
-  "extends": "airbnb-base",
   "plugins": [
     "html"
   ],

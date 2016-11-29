@@ -14,7 +14,7 @@ exports.cssLoaders = function (options) {
   options = options || {};
 
   // generate loader string to be used with extract text plugin
-  function generateLoaders (loaders) {
+  function generateLoaders(loaders) {
     var sourceLoader = loaders.map(function (loader) {
       var extraParamChar;
       if (/\?/.test(loader)) {
